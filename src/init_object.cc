@@ -20,6 +20,8 @@
 #include <allegro5/allegro_ttf.h>
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_image.h>
+#include <allegro5/allegro_audio.h>
+#include <allegro5/allegro_acodec.h>
 #include <fstream>
 #include <string>
 #include <sstream>
@@ -32,7 +34,8 @@ using namespace std;
 #include "init_object.h"
 
 extern player p2;
-
+ALLEGRO_SAMPLE *damageL;
+ALLEGRO_SAMPLE *damageR;
 
 void init_player(player &p, float x, float y, int life, float movespeed, int sx, int sy){
   p.x  = x;
@@ -42,7 +45,7 @@ void init_player(player &p, float x, float y, int life, float movespeed, int sx,
   p.sourceX = sx;
   p.sourceY = sy;
   strcpy(p.arma.nome, "pistol");
-  p.arma.id = 3;
+  p.arma.id = 4;
   p.arma.numBullets = NbulletPistol;
   p.arma.x =0;
   p.arma.y = 0;

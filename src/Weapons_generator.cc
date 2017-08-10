@@ -73,3 +73,11 @@ void set_position_on_map(weapon WArray[]){
   WArray[5].x = 30;
   WArray[5].y = 650;
 }
+
+bool is_emptyA(weapon WArray[]){
+  for(int i=0; i<NUM_ITEMS; i++)
+    if(WArray[i].id != 0) return false;
+  return true;
+
+
+}

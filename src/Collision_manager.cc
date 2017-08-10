@@ -17,6 +17,8 @@
 #include <allegro5/allegro_ttf.h>
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_image.h>
+#include <allegro5/allegro_audio.h>
+#include <allegro5/allegro_acodec.h>
 #include <fstream>
 #include <string>
 #include <sstream>
@@ -34,7 +36,8 @@ using namespace std;
 
 extern player p1,p2;
 
-
+extern ALLEGRO_SAMPLE *damageR;
+extern ALLEGRO_SAMPLE *damageL;
 bool collision(int x, int y, int ex, int ey, int width, int height, int we, int he)
 {
   if(x + width <= ex || y+height<=ey || x>=ex+we || y>=ey+he)
@@ -75,6 +78,7 @@ bool check_collision_player(Barrier obstacles[], int player){
 bool check_collision(Barrier obstacles[], int player, int colpi1, int colpi2){
   if(player == 1 && p1.arma.b[colpi1].live == true){
     if(collision(p1.arma.b[colpi1].cx, p1.arma.b[colpi1].cy, p2.x, p2.y, p1.arma.b[colpi1].radius+5, p1.arma.b[colpi1].radius+5, 64,64)){
+      if(!al_play_sample(damageR, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL)) std::cout << "erroreWIWI" << '\n';;
       p2.life -= p1.arma.b[colpi1].Damage;
       cout<<"damage"<<endl;
       return true;
@@ -88,7 +92,7 @@ bool check_collision(Barrier obstacles[], int player, int colpi1, int colpi2){
   }else if(player == 2 && p2.arma.b[colpi2].live == true) {
 
     if(collision(p2.arma.b[colpi2].cx, p2.arma.b[colpi2].cy, p1.x, p1.y, p2.arma.b[colpi2].radius+5, p2.arma.b[colpi2].radius+5, 64,64)){
-
+      al_play_sample(damageL, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
       p1.life -= p2.arma.b[colpi2].Damage;
       cout<<"damage2"<<endl;
       return true;
@@ -133,6 +137,7 @@ int check_collision_weapon(weapon WArray[], int player){
 
 
 }
+
 
 
 /* Fine modulo gestione delle collisioni */

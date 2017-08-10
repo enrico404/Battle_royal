@@ -25,6 +25,8 @@
 #include <allegro5/allegro_ttf.h>
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_image.h>
+#include <allegro5/allegro_audio.h>
+#include <allegro5/allegro_acodec.h>
 #include <fstream>
 #include <string>
 #include <sstream>
@@ -68,8 +70,12 @@ void stampaB(Bullet b[]){
 
 
 
+
+
 int counter =0;
 int counter2 = 0;
+
+
 int main(int argc, char **argv)
 {
 
@@ -112,6 +118,7 @@ int main(int argc, char **argv)
 
 
 
+
   init_bazooka(bazooka);
   init_rifle(rifle);
   init_heart(heart);
@@ -123,6 +130,7 @@ int main(int argc, char **argv)
   genWeaponsArray(WArray, bazooka, rifle, heart);
   set_position_on_map(WArray);
 
+
   if(!al_init()){
     al_show_native_message_box(display,"Error","Error","Error on initialisation", NULL,ALLEGRO_MESSAGEBOX_ERROR);
     return 1;
@@ -132,6 +140,18 @@ int main(int argc, char **argv)
   al_install_keyboard();
   al_install_mouse();
   al_init_image_addon();
+  al_install_audio();
+  al_init_acodec_addon();
+  /** riservo lo spazio per i samples */
+  al_reserve_samples(200000); //più è grande il numero, più ram occupo
+
+  extern ALLEGRO_SAMPLE *damageR;
+  extern ALLEGRO_SAMPLE *damageL;
+
+
+
+
+
 
 
   al_set_new_display_flags(ALLEGRO_WINDOWED);
@@ -153,9 +173,13 @@ int main(int argc, char **argv)
     ALLEGRO_FONT *font = al_load_font("./fonts/Roboto-Bold.ttf", 30, 0);
     ALLEGRO_FONT *font2 = al_load_font("./fonts/Roboto-Bold.ttf", 20, 0);
 
-    /** caricamento personaggi */
+    /** caricamento texture personaggi */
     ALLEGRO_BITMAP *player = al_load_bitmap("../media/player.png");
     ALLEGRO_BITMAP *player2 = al_load_bitmap("../media/player2.png");
+    ALLEGRO_BITMAP *playerRifle = al_load_bitmap("../media/playerRifle.png");
+    ALLEGRO_BITMAP *player2Rifle = al_load_bitmap("../media/player2Rifle.png");
+    ALLEGRO_BITMAP *playerBazooka = al_load_bitmap("../media/playerBazooka.png");
+    ALLEGRO_BITMAP *player2Bazooka = al_load_bitmap("../media/player2Bazooka.png");
     /** carico texture mappa */
 
     ALLEGRO_BITMAP *ground = al_load_bitmap("../media/ground.jpg");
@@ -169,6 +193,15 @@ int main(int argc, char **argv)
     ALLEGRO_BITMAP *rifleTexture = al_load_bitmap("../media/rifle.png");
     ALLEGRO_BITMAP *HeartTexture = al_load_bitmap("../media/HeartTexture.png");
 
+    /** carico samples per gli effetti sonori */
+    ALLEGRO_SAMPLE *pistolShot = al_load_sample("../media/Sounds/pistolShot.wav");
+    ALLEGRO_SAMPLE *BazookaShot = al_load_sample("../media/Sounds/BazookaShot.wav");
+    ALLEGRO_SAMPLE *RifleShot = al_load_sample("../media/Sounds/RifleShot.wav");
+    ALLEGRO_SAMPLE *equipWeapon = al_load_sample("../media/Sounds/equipWeapon.wav");
+    ALLEGRO_SAMPLE *lifeUp = al_load_sample("../media/Sounds/lifeUp.wav");
+
+    damageR = al_load_sample("../media/Sounds/damageR.wav");
+    damageL = al_load_sample("../media/Sounds/damageL.wav");
 
     /** coda eventi  */
 
@@ -198,7 +231,7 @@ int main(int argc, char **argv)
     int tmpX, tmpY;
     bool inCorso = false;
 
-
+    // if(al_is_audio_installed()) std::cout << "audio installato" << '\n';
 
     al_start_timer(timer);
 
@@ -228,23 +261,49 @@ int main(int argc, char **argv)
         switch(events.keyboard.keycode){
           case ALLEGRO_KEY_LCTRL: {
             if(p1.arma.numBullets>0){
-              if(strcmp(p1.arma.nome, "pistol") == 0)
-              Shot(sparo, 1);
-              if(strcmp(p1.arma.nome, "bazooka") == 0)
-              Shot(sparo, 1);
-              if(strcmp(p1.arma.nome, "rifle") == 0)
-              ShotRifle(sparo, 1);
+              if(strcmp(p1.arma.nome, "pistol") == 0){
+                  if(sparo==false)
+                  al_play_sample(pistolShot, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+                  Shot(sparo, 1);
+              }
+
+              if(strcmp(p1.arma.nome, "bazooka") == 0){
+                if(sparo==false)
+                al_play_sample(BazookaShot, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+                Shot(sparo, 1);
+
+              }
+
+              if(strcmp(p1.arma.nome, "rifle") == 0){
+
+                al_play_sample(RifleShot, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+                ShotRifle(sparo, 1);
+              }
+
 
             }
           } break;
           case ALLEGRO_KEY_J:{
             if(p2.arma.numBullets>0){
-              if(strcmp(p2.arma.nome, "pistol") == 0)
-              Shot(sparo2, 2);
-              if(strcmp(p2.arma.nome, "bazooka") == 0)
-              Shot(sparo2, 2);
-              if(strcmp(p2.arma.nome, "rifle") == 0)
-              ShotRifle(sparo2, 2);
+              if(strcmp(p2.arma.nome, "pistol") == 0){
+                if(sparo2==false)
+                al_play_sample(pistolShot, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+                Shot(sparo2, 2);
+
+              }
+
+              if(strcmp(p2.arma.nome, "bazooka") == 0){
+                if(sparo2==false)
+                al_play_sample(BazookaShot, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+                Shot(sparo2, 2);
+
+              }
+
+              if(strcmp(p2.arma.nome, "rifle") == 0){
+                al_play_sample(RifleShot, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+                ShotRifle(sparo2, 2);
+              }
+
 
             }
           } break;
@@ -283,18 +342,6 @@ int main(int argc, char **argv)
 
 
 
-          // else if(al_key_down(&keyState, ALLEGRO_KEY_LCTRL))
-          // {
-          //
-          //   if(p1.colpi>0){
-          //     sparo(b1, sparo, 1);
-          //     sparo = true;
-          //   }
-          //
-          // }
-
-
-
           else active = false;
           //animazione player
           if(active) p1.sourceX += al_get_bitmap_width(player) / 9;
@@ -306,6 +353,7 @@ int main(int argc, char **argv)
 
 
           if(check_collision_player(obstacles,1)){
+
             if(dir == DOWN){
               p1.y-=p1.movespeed;
 
@@ -324,17 +372,21 @@ int main(int argc, char **argv)
           }
           int oggetto;
           if((oggetto = check_collision_weapon(WArray, 1))){
+
             //equip oggetto
             if(oggetto == 1){
+              al_play_sample(equipWeapon, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
               strcpy(p1.arma.nome, "bazooka");
               p1.arma = bazooka;
 
             }
             if(oggetto == 2){
+              al_play_sample(equipWeapon, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
               strcpy(p1.arma.nome, "rifle");
               p1.arma = rifle;
             }
             if(oggetto == 3){
+              al_play_sample(lifeUp, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
               if((p1.life+25)<100)
                 p1.life += 25;
               else{
@@ -370,13 +422,7 @@ int main(int argc, char **argv)
               p2.x -= p2.movespeed; dir2= LEFT;
             }
           }
-          // else if(al_key_down(&keyState, ALLEGRO_KEY_J)){
-          //   if(p2.colpi >0){
-          //     sparo(b2, sparo2, 2);
-          //     sparo2 = true;
-          //
-          //   }
-          // }
+
           else active2 = false;
 
           //animazione player
@@ -406,17 +452,21 @@ int main(int argc, char **argv)
 
           int oggetto2;
           if((oggetto2 = check_collision_weapon(WArray, 2))){
+
             //equip oggetto2
             if(oggetto2 == 1){
+              al_play_sample(equipWeapon, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
               strcpy(p2.arma.nome, "bazooka");
               p2.arma = bazooka;
 
             }
             if(oggetto2 == 2){
+              al_play_sample(equipWeapon, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
               strcpy(p2.arma.nome, "rifle");
               p2.arma = rifle;
             }
             if(oggetto2 == 3){
+              al_play_sample(lifeUp, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
               if((p2.life+25)<100)
                 p2.life += 25;
               else{
@@ -442,6 +492,11 @@ int main(int argc, char **argv)
 
 
               }
+      //se non ci sono più armi sul terreno di gioco, le rigenero
+      if(is_emptyA(WArray)){
+          genWeaponsArray(WArray, bazooka, rifle, heart);
+          set_position_on_map(WArray);
+      }
 
 
       if(draw){
@@ -468,8 +523,23 @@ int main(int argc, char **argv)
         drawBullet(obstacles, dir2,sparo2,2, p1.arma.numBullets,p2.arma.numBullets);
 
         draw_obstacles(obstacles, rock, rockH, wall);
+
+
         draw_items(WArray, bazookaTexture, rifleTexture, HeartTexture);
+
+        if(p1.arma.id == 1)
+        al_draw_bitmap_region(playerBazooka, p1.sourceX, p1.sourceY * al_get_bitmap_height(player) / 4, 64, 64, p1.x, p1.y,0);
+        if(p1.arma.id == 2)
+        al_draw_bitmap_region(playerRifle, p1.sourceX, p1.sourceY * al_get_bitmap_height(player) / 4, 64, 64, p1.x, p1.y,0);
+        if(p1.arma.id == 4)
         al_draw_bitmap_region(player, p1.sourceX, p1.sourceY * al_get_bitmap_height(player) / 4, 64, 64, p1.x, p1.y,0);
+
+
+        if(p2.arma.id == 1)
+        al_draw_bitmap_region(player2Bazooka, p2.sourceX, p2.sourceY * al_get_bitmap_height(player2) / 4, 64, 64, p2.x, p2.y, 0);
+        if(p2.arma.id == 2)
+        al_draw_bitmap_region(player2Rifle, p2.sourceX, p2.sourceY * al_get_bitmap_height(player2) / 4, 64, 64, p2.x, p2.y, 0);
+        if(p2.arma.id == 4)
         al_draw_bitmap_region(player2, p2.sourceX, p2.sourceY * al_get_bitmap_height(player2) / 4, 64, 64, p2.x, p2.y, 0);
 
         al_draw_text(font, al_map_rgb(255,255,255), 20, 10, 0, life);
@@ -495,6 +565,17 @@ int main(int argc, char **argv)
       }
 
     }
+
+
+
+    /** dallocamento risorse */
+    al_destroy_sample(damageL);
+    al_destroy_sample(damageR);
+    al_destroy_sample(lifeUp);
+    al_destroy_sample(equipWeapon);
+    al_destroy_sample(pistolShot);
+    al_destroy_sample(BazookaShot);
+    al_destroy_sample(RifleShot);
     al_destroy_bitmap(HeartTexture);
     al_destroy_bitmap(rifleTexture);
     al_destroy_bitmap(bazookaTexture);
@@ -505,6 +586,10 @@ int main(int argc, char **argv)
     al_destroy_bitmap(ground2);
     al_destroy_bitmap(player);
     al_destroy_bitmap(player2);
+    al_destroy_bitmap(playerRifle);
+    al_destroy_bitmap(player2Rifle);
+    al_destroy_bitmap(playerBazooka);
+    al_destroy_bitmap(player2Bazooka);
     al_destroy_timer(timer);
     al_destroy_event_queue(event_queue);
     al_destroy_display(display);
