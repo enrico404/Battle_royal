@@ -66,25 +66,25 @@ void drawBullet(Barrier obstacles[], int dir, bool &sparo, int player, int colpi
 
         if(dir == 0 && p1.arma.b[colpi1].live == true ){ //UP
 
-          al_draw_filled_circle(p1.arma.b[colpi1].cx+32, p1.arma.b[colpi1].cy, p1.arma.b[colpi1].radius, al_map_rgb(255,0,0));
+          al_draw_filled_circle(p1.arma.b[colpi1].cx+32, p1.arma.b[colpi1].cy, p1.arma.b[colpi1].radius, al_map_rgb(142,44,2));
           p1.arma.b[colpi1].cy -= p1.arma.b[colpi1].velocity;
           if(p1.arma.b[colpi1].cy <= 0){ p1.arma.b[colpi1].live = false;sparo = false; }
         }
         if(dir == 1 && p1.arma.b[colpi1].live == true ){ //LEFT
 
-          al_draw_filled_circle(p1.arma.b[colpi1].cx, p1.arma.b[colpi1].cy+32, p1.arma.b[colpi1].radius, al_map_rgb(255,0,0));
+          al_draw_filled_circle(p1.arma.b[colpi1].cx, p1.arma.b[colpi1].cy+32, p1.arma.b[colpi1].radius, al_map_rgb(142,44,2));
           p1.arma.b[colpi1].cx -= p1.arma.b[colpi1].velocity;
           if(p1.arma.b[colpi1].cx <= 0){ p1.arma.b[colpi1].live = false;sparo = false;}
         }
         if(dir == 2 && p1.arma.b[colpi1].live == true ){ //DOWN
 
-          al_draw_filled_circle(p1.arma.b[colpi1].cx+32, p1.arma.b[colpi1].cy+64, p1.arma.b[colpi1].radius, al_map_rgb(255,0,0));
+          al_draw_filled_circle(p1.arma.b[colpi1].cx+32, p1.arma.b[colpi1].cy+64, p1.arma.b[colpi1].radius, al_map_rgb(142,44,2));
           p1.arma.b[colpi1].cy += p1.arma.b[colpi1].velocity;
           if(p1.arma.b[colpi1].cy >= Sheight){ p1.arma.b[colpi1].live = false;sparo = false;}
         }
         if(dir == 3 && p1.arma.b[colpi1].live == true ){ //RIGHT
 
-          al_draw_filled_circle(p1.arma.b[colpi1].cx+32, p1.arma.b[colpi1].cy+32, p1.arma.b[colpi1].radius, al_map_rgb(255,0,0));
+          al_draw_filled_circle(p1.arma.b[colpi1].cx+32, p1.arma.b[colpi1].cy+32, p1.arma.b[colpi1].radius, al_map_rgb(142,44,2));
           p1.arma.b[colpi1].cx += p1.arma.b[colpi1].velocity;
           if(p1.arma.b[colpi1].cx >= Swidth){ p1.arma.b[colpi1].live = false;sparo = false;}
         }
@@ -99,26 +99,26 @@ void drawBullet(Barrier obstacles[], int dir, bool &sparo, int player, int colpi
 
         if(dir == 0 && p2.arma.b[colpi2].live == true ){ //UP
 
-          al_draw_filled_circle(p2.arma.b[colpi2].cx+32, p2.arma.b[colpi2].cy, p2.arma.b[colpi2].radius, al_map_rgb(255,0,0));
+          al_draw_filled_circle(p2.arma.b[colpi2].cx+32, p2.arma.b[colpi2].cy, p2.arma.b[colpi2].radius, al_map_rgb(142,44,2));
           p2.arma.b[colpi2].cy -= p2.arma.b[colpi2].velocity;
 
           if(p2.arma.b[colpi2].cy <= 0){ p2.arma.b[colpi2].live = false;sparo = false; }
         }
         if(dir == 1 && p2.arma.b[colpi2].live == true ){ //LEFT
 
-          al_draw_filled_circle(p2.arma.b[colpi2].cx, p2.arma.b[colpi2].cy+32, p2.arma.b[colpi2].radius, al_map_rgb(255,0,0));
+          al_draw_filled_circle(p2.arma.b[colpi2].cx, p2.arma.b[colpi2].cy+32, p2.arma.b[colpi2].radius, al_map_rgb(142,44,2));
           p2.arma.b[colpi2].cx -= p2.arma.b[colpi2].velocity;
           if(p2.arma.b[colpi2].cx <= 0){ p2.arma.b[colpi2].live = false;sparo = false;}
         }
         if(dir == 2 && p2.arma.b[colpi2].live == true ){ //DOWN
 
-          al_draw_filled_circle(p2.arma.b[colpi2].cx+32, p2.arma.b[colpi2].cy+64, p2.arma.b[colpi2].radius, al_map_rgb(255,0,0));
+          al_draw_filled_circle(p2.arma.b[colpi2].cx+32, p2.arma.b[colpi2].cy+64, p2.arma.b[colpi2].radius, al_map_rgb(142,44,2));
           p2.arma.b[colpi2].cy += p2.arma.b[colpi2].velocity;
           if(p2.arma.b[colpi2].cy >= Sheight){ p2.arma.b[colpi2].live = false;sparo = false;}
         }
         if(dir == 3 && p2.arma.b[colpi2].live == true ){ //RIGHT
 
-          al_draw_filled_circle(p2.arma.b[colpi2].cx+32, p2.arma.b[colpi2].cy+32, p2.arma.b[colpi2].radius, al_map_rgb(255,0,0));
+          al_draw_filled_circle(p2.arma.b[colpi2].cx+32, p2.arma.b[colpi2].cy+32, p2.arma.b[colpi2].radius, al_map_rgb(142,44,2));
           p2.arma.b[colpi2].cx += p2.arma.b[colpi2].velocity;
           if(p2.arma.b[colpi2].cx >= Swidth){ p2.arma.b[colpi2].live = false;sparo = false;}
         }
@@ -179,14 +179,14 @@ void drawBullet_rifle(Barrier obstacles[], int dir, bool &sparo, int player, int
       if(dir == 0){ //UP
 
         if(p1.arma.b[colpi1].live == true && !check_collision(obstacles, player, colpi1, colpi2)){
-          al_draw_filled_circle(p1.arma.b[colpi1].cx+32, p1.arma.b[colpi1].cy, p1.arma.b[colpi1].radius, al_map_rgb(255,0,0));
+          al_draw_filled_circle(p1.arma.b[colpi1].cx+32, p1.arma.b[colpi1].cy, p1.arma.b[colpi1].radius, al_map_rgb(142,44,2));
           p1.arma.b[colpi1].cy -= p1.arma.b[colpi1].velocity;
           if(p1.arma.b[colpi1].cy <= 0){ p1.arma.b[colpi1].live = false; }
         }else p1.arma.b[colpi1].live = false;
 
         if( p1.arma.b[colpi1+1].live == true && !check_collision(obstacles, player, colpi1+1, colpi2)){
 
-          al_draw_filled_circle(p1.arma.b[colpi1+1].cx+32, p1.arma.b[colpi1+1].cy, p1.arma.b[colpi1+1].radius, al_map_rgb(255,0,0));
+          al_draw_filled_circle(p1.arma.b[colpi1+1].cx+32, p1.arma.b[colpi1+1].cy, p1.arma.b[colpi1+1].radius, al_map_rgb(142,44,2));
           p1.arma.b[colpi1+1].cy -= p1.arma.b[colpi1+1].velocity;
           if(p1.arma.b[colpi1+1].cy <= 0){ p1.arma.b[colpi1+1].live = false;}
         }else p1.arma.b[colpi1+1].live = false;
@@ -194,7 +194,7 @@ void drawBullet_rifle(Barrier obstacles[], int dir, bool &sparo, int player, int
 
         if( p1.arma.b[colpi1+2].live == true && !check_collision(obstacles, player, colpi1+2, colpi2)){
 
-          al_draw_filled_circle(p1.arma.b[colpi1+2].cx+32, p1.arma.b[colpi1+2].cy, p1.arma.b[colpi1+2].radius, al_map_rgb(255,0,0));
+          al_draw_filled_circle(p1.arma.b[colpi1+2].cx+32, p1.arma.b[colpi1+2].cy, p1.arma.b[colpi1+2].radius, al_map_rgb(142,44,2));
           p1.arma.b[colpi1+2].cy -= p1.arma.b[colpi1+2].velocity;
           if(p1.arma.b[colpi1+2].cy <= 0){ p1.arma.b[colpi1+2].live = false;  }
         }else p1.arma.b[colpi1+2].live = false;
@@ -209,13 +209,13 @@ void drawBullet_rifle(Barrier obstacles[], int dir, bool &sparo, int player, int
 
         if(p1.arma.b[colpi1].live == true && !check_collision(obstacles, player, colpi1, colpi2)){
 
-          al_draw_filled_circle(p1.arma.b[colpi1].cx, p1.arma.b[colpi1].cy+32, p1.arma.b[colpi1].radius, al_map_rgb(255,0,0));
+          al_draw_filled_circle(p1.arma.b[colpi1].cx, p1.arma.b[colpi1].cy+32, p1.arma.b[colpi1].radius, al_map_rgb(142,44,2));
           p1.arma.b[colpi1].cx -= p1.arma.b[colpi1].velocity;
           if(p1.arma.b[colpi1].cx <= 0){ p1.arma.b[colpi1].live = false;}
         }else  p1.arma.b[colpi1].live = false;
 
         if( p1.arma.b[colpi1+1].live == true && !check_collision(obstacles, player, colpi1+1, colpi2)){
-          al_draw_filled_circle(p1.arma.b[colpi1+1].cx, p1.arma.b[colpi1+1].cy+32, p1.arma.b[colpi1+1].radius, al_map_rgb(255,0,0));
+          al_draw_filled_circle(p1.arma.b[colpi1+1].cx, p1.arma.b[colpi1+1].cy+32, p1.arma.b[colpi1+1].radius, al_map_rgb(142,44,2));
           p1.arma.b[colpi1+1].cx -= p1.arma.b[colpi1+1].velocity;
           if(p1.arma.b[colpi1+1].cx <= 0){ p1.arma.b[colpi1+1].live = false;}
         }else p1.arma.b[colpi1+1].live = false;
@@ -223,7 +223,7 @@ void drawBullet_rifle(Barrier obstacles[], int dir, bool &sparo, int player, int
 
         if( p1.arma.b[colpi1+2].live == true && !check_collision(obstacles, player, colpi1+2, colpi2)){
 
-          al_draw_filled_circle(p1.arma.b[colpi1+2].cx, p1.arma.b[colpi1+2].cy+32, p1.arma.b[colpi1+2].radius, al_map_rgb(255,0,0));
+          al_draw_filled_circle(p1.arma.b[colpi1+2].cx, p1.arma.b[colpi1+2].cy+32, p1.arma.b[colpi1+2].radius, al_map_rgb(142,44,2));
           p1.arma.b[colpi1+2].cx -= p1.arma.b[colpi1+2].velocity;
           if(p1.arma.b[colpi1+2].cx <= 0){ p1.arma.b[colpi1+2].live = false; }
         }else p1.arma.b[colpi1+2].live = false;
@@ -237,20 +237,20 @@ void drawBullet_rifle(Barrier obstacles[], int dir, bool &sparo, int player, int
       if(dir == 2){ //DOWN
         if(p1.arma.b[colpi1].live == true && !check_collision(obstacles, player, colpi1, colpi2)){
 
-          al_draw_filled_circle(p1.arma.b[colpi1].cx+32, p1.arma.b[colpi1].cy+64, p1.arma.b[colpi1].radius, al_map_rgb(255,0,0));
+          al_draw_filled_circle(p1.arma.b[colpi1].cx+32, p1.arma.b[colpi1].cy+64, p1.arma.b[colpi1].radius, al_map_rgb(142,44,2));
           p1.arma.b[colpi1].cy += p1.arma.b[colpi1].velocity;
           if(p1.arma.b[colpi1].cy >= Sheight){ p1.arma.b[colpi1].live = false;}
         }else p1.arma.b[colpi1].live = false;
 
         if( p1.arma.b[colpi1+1].live == true && !check_collision(obstacles, player, colpi1+1, colpi2)){
-          al_draw_filled_circle(p1.arma.b[colpi1+1].cx+32, p1.arma.b[colpi1+1].cy+64, p1.arma.b[colpi1+1].radius, al_map_rgb(255,0,0));
+          al_draw_filled_circle(p1.arma.b[colpi1+1].cx+32, p1.arma.b[colpi1+1].cy+64, p1.arma.b[colpi1+1].radius, al_map_rgb(142,44,2));
           p1.arma.b[colpi1+1].cy += p1.arma.b[colpi1+1].velocity;
           if(p1.arma.b[colpi1+1].cy >= Sheight){ p1.arma.b[colpi1+1].live = false;}
 
 
         }else p1.arma.b[colpi1+1].live = false;
         if( p1.arma.b[colpi1+2].live == true && !check_collision(obstacles, player, colpi1+2, colpi2)){
-          al_draw_filled_circle(p1.arma.b[colpi1+2].cx+32, p1.arma.b[colpi1+2].cy+64, p1.arma.b[colpi1+2].radius, al_map_rgb(255,0,0));
+          al_draw_filled_circle(p1.arma.b[colpi1+2].cx+32, p1.arma.b[colpi1+2].cy+64, p1.arma.b[colpi1+2].radius, al_map_rgb(142,44,2));
           p1.arma.b[colpi1+2].cy += p1.arma.b[colpi1+2].velocity;
           if(p1.arma.b[colpi1+2].cy >= Sheight){ p1.arma.b[colpi1+2].live = false;}
 
@@ -267,20 +267,20 @@ void drawBullet_rifle(Barrier obstacles[], int dir, bool &sparo, int player, int
 
         if(p1.arma.b[colpi1].live == true && !check_collision(obstacles, player, colpi1, colpi2)){
 
-          al_draw_filled_circle(p1.arma.b[colpi1].cx+32, p1.arma.b[colpi1].cy+32, p1.arma.b[colpi1].radius, al_map_rgb(255,0,0));
+          al_draw_filled_circle(p1.arma.b[colpi1].cx+32, p1.arma.b[colpi1].cy+32, p1.arma.b[colpi1].radius, al_map_rgb(142,44,2));
           p1.arma.b[colpi1].cx += p1.arma.b[colpi1].velocity;
           if(p1.arma.b[colpi1].cx >= Swidth){ p1.arma.b[colpi1].live = false;}
         }else p1.arma.b[colpi1].live = false;
 
         if( p1.arma.b[colpi1+1].live == true && !check_collision(obstacles, player, colpi1+1, colpi2)){
-          al_draw_filled_circle(p1.arma.b[colpi1+1].cx+32, p1.arma.b[colpi1+1].cy+32, p1.arma.b[colpi1+1].radius, al_map_rgb(255,0,0));
+          al_draw_filled_circle(p1.arma.b[colpi1+1].cx+32, p1.arma.b[colpi1+1].cy+32, p1.arma.b[colpi1+1].radius, al_map_rgb(142,44,2));
           p1.arma.b[colpi1+1].cx += p1.arma.b[colpi1+1].velocity;
           if(p1.arma.b[colpi1+1].cx >= Swidth){ p1.arma.b[colpi1+1].live = false;}
 
 
         }else p1.arma.b[colpi1+1].live = false;
         if( p1.arma.b[colpi1+2].live == true && !check_collision(obstacles, player, colpi1+2, colpi2)){
-          al_draw_filled_circle(p1.arma.b[colpi1+2].cx+32, p1.arma.b[colpi1+2].cy+32, p1.arma.b[colpi1+2].radius, al_map_rgb(255,0,0));
+          al_draw_filled_circle(p1.arma.b[colpi1+2].cx+32, p1.arma.b[colpi1+2].cy+32, p1.arma.b[colpi1+2].radius, al_map_rgb(142,44,2));
           p1.arma.b[colpi1+2].cx += p1.arma.b[colpi1+2].velocity;
           if(p1.arma.b[colpi1+2].cx >= Swidth){ p1.arma.b[colpi1+2].live = false; }
 
@@ -298,14 +298,14 @@ void drawBullet_rifle(Barrier obstacles[], int dir, bool &sparo, int player, int
       if(dir == 0){ //UP
 
         if(p2.arma.b[colpi2].live == true && !check_collision(obstacles, player, colpi2, colpi2)){
-          al_draw_filled_circle(p2.arma.b[colpi2].cx+32, p2.arma.b[colpi2].cy, p2.arma.b[colpi2].radius, al_map_rgb(255,0,0));
+          al_draw_filled_circle(p2.arma.b[colpi2].cx+32, p2.arma.b[colpi2].cy, p2.arma.b[colpi2].radius, al_map_rgb(142,44,2));
           p2.arma.b[colpi2].cy -= p2.arma.b[colpi2].velocity;
           if(p2.arma.b[colpi2].cy <= 0){ p2.arma.b[colpi2].live = false; }
         }else p2.arma.b[colpi2].live = false;
 
         if( p2.arma.b[colpi2+1].live == true && !check_collision(obstacles, player, colpi2+1, colpi2)){
 
-          al_draw_filled_circle(p2.arma.b[colpi2+1].cx+32, p2.arma.b[colpi2+1].cy, p2.arma.b[colpi2+1].radius, al_map_rgb(255,0,0));
+          al_draw_filled_circle(p2.arma.b[colpi2+1].cx+32, p2.arma.b[colpi2+1].cy, p2.arma.b[colpi2+1].radius, al_map_rgb(142,44,2));
           p2.arma.b[colpi2+1].cy -= p2.arma.b[colpi2+1].velocity;
           if(p2.arma.b[colpi2+1].cy <= 0){ p2.arma.b[colpi2+1].live = false;}
         }else p2.arma.b[colpi2+1].live = false;
@@ -313,7 +313,7 @@ void drawBullet_rifle(Barrier obstacles[], int dir, bool &sparo, int player, int
 
         if( p2.arma.b[colpi2+2].live == true && !check_collision(obstacles, player, colpi2+2, colpi2)){
 
-          al_draw_filled_circle(p2.arma.b[colpi2+2].cx+32, p2.arma.b[colpi2+2].cy, p2.arma.b[colpi2+2].radius, al_map_rgb(255,0,0));
+          al_draw_filled_circle(p2.arma.b[colpi2+2].cx+32, p2.arma.b[colpi2+2].cy, p2.arma.b[colpi2+2].radius, al_map_rgb(142,44,2));
           p2.arma.b[colpi2+2].cy -= p2.arma.b[colpi2+2].velocity;
           if(p2.arma.b[colpi2+2].cy <= 0){ p2.arma.b[colpi2+2].live = false;  }
         }else p2.arma.b[colpi2+2].live = false;
@@ -328,13 +328,13 @@ void drawBullet_rifle(Barrier obstacles[], int dir, bool &sparo, int player, int
 
         if(p2.arma.b[colpi2].live == true && !check_collision(obstacles, player, colpi2, colpi2)){
 
-          al_draw_filled_circle(p2.arma.b[colpi2].cx, p2.arma.b[colpi2].cy+32, p2.arma.b[colpi2].radius, al_map_rgb(255,0,0));
+          al_draw_filled_circle(p2.arma.b[colpi2].cx, p2.arma.b[colpi2].cy+32, p2.arma.b[colpi2].radius, al_map_rgb(142,44,2));
           p2.arma.b[colpi2].cx -= p2.arma.b[colpi2].velocity;
           if(p2.arma.b[colpi2].cx <= 0){ p2.arma.b[colpi2].live = false;}
         }else  p2.arma.b[colpi2].live = false;
 
         if( p2.arma.b[colpi2+1].live == true && !check_collision(obstacles, player, colpi2+1, colpi2)){
-          al_draw_filled_circle(p2.arma.b[colpi2+1].cx, p2.arma.b[colpi2+1].cy+32, p2.arma.b[colpi2+1].radius, al_map_rgb(255,0,0));
+          al_draw_filled_circle(p2.arma.b[colpi2+1].cx, p2.arma.b[colpi2+1].cy+32, p2.arma.b[colpi2+1].radius, al_map_rgb(142,44,2));
           p2.arma.b[colpi2+1].cx -= p2.arma.b[colpi2+1].velocity;
           if(p2.arma.b[colpi2+1].cx <= 0){ p2.arma.b[colpi2+1].live = false;}
         }else p2.arma.b[colpi2+1].live = false;
@@ -342,7 +342,7 @@ void drawBullet_rifle(Barrier obstacles[], int dir, bool &sparo, int player, int
 
         if( p2.arma.b[colpi2+2].live == true && !check_collision(obstacles, player, colpi2+2, colpi2)){
 
-          al_draw_filled_circle(p2.arma.b[colpi2+2].cx, p2.arma.b[colpi2+2].cy+32, p2.arma.b[colpi2+2].radius, al_map_rgb(255,0,0));
+          al_draw_filled_circle(p2.arma.b[colpi2+2].cx, p2.arma.b[colpi2+2].cy+32, p2.arma.b[colpi2+2].radius, al_map_rgb(142,44,2));
           p2.arma.b[colpi2+2].cx -= p2.arma.b[colpi2+2].velocity;
           if(p2.arma.b[colpi2+2].cx <= 0){ p2.arma.b[colpi2+2].live = false; }
         }else p2.arma.b[colpi2+2].live = false;
@@ -356,20 +356,20 @@ void drawBullet_rifle(Barrier obstacles[], int dir, bool &sparo, int player, int
       if(dir == 2){ //DOWN
         if(p2.arma.b[colpi2].live == true && !check_collision(obstacles, player, colpi2, colpi2)){
 
-          al_draw_filled_circle(p2.arma.b[colpi2].cx+32, p2.arma.b[colpi2].cy+64, p2.arma.b[colpi2].radius, al_map_rgb(255,0,0));
+          al_draw_filled_circle(p2.arma.b[colpi2].cx+32, p2.arma.b[colpi2].cy+64, p2.arma.b[colpi2].radius, al_map_rgb(142,44,2));
           p2.arma.b[colpi2].cy += p2.arma.b[colpi2].velocity;
           if(p2.arma.b[colpi2].cy >= Sheight){ p2.arma.b[colpi2].live = false;}
         }else p2.arma.b[colpi2].live = false;
 
         if( p2.arma.b[colpi2+1].live == true && !check_collision(obstacles, player, colpi2+1, colpi2)){
-          al_draw_filled_circle(p2.arma.b[colpi2+1].cx+32, p2.arma.b[colpi2+1].cy+64, p2.arma.b[colpi2+1].radius, al_map_rgb(255,0,0));
+          al_draw_filled_circle(p2.arma.b[colpi2+1].cx+32, p2.arma.b[colpi2+1].cy+64, p2.arma.b[colpi2+1].radius, al_map_rgb(142,44,2));
           p2.arma.b[colpi2+1].cy += p2.arma.b[colpi2+1].velocity;
           if(p2.arma.b[colpi2+1].cy >= Sheight){ p2.arma.b[colpi2+1].live = false;}
 
 
         }else p2.arma.b[colpi2+1].live = false;
         if( p2.arma.b[colpi2+2].live == true && !check_collision(obstacles, player, colpi2+2, colpi2)){
-          al_draw_filled_circle(p2.arma.b[colpi2+2].cx+32, p2.arma.b[colpi2+2].cy+64, p2.arma.b[colpi2+2].radius, al_map_rgb(255,0,0));
+          al_draw_filled_circle(p2.arma.b[colpi2+2].cx+32, p2.arma.b[colpi2+2].cy+64, p2.arma.b[colpi2+2].radius, al_map_rgb(142,44,2));
           p2.arma.b[colpi2+2].cy += p2.arma.b[colpi2+2].velocity;
           if(p2.arma.b[colpi2+2].cy >= Sheight){ p2.arma.b[colpi2+2].live = false;}
 
@@ -386,20 +386,20 @@ void drawBullet_rifle(Barrier obstacles[], int dir, bool &sparo, int player, int
 
         if(p2.arma.b[colpi2].live == true && !check_collision(obstacles, player, colpi2, colpi2)){
 
-          al_draw_filled_circle(p2.arma.b[colpi2].cx+32, p2.arma.b[colpi2].cy+32, p2.arma.b[colpi2].radius, al_map_rgb(255,0,0));
+          al_draw_filled_circle(p2.arma.b[colpi2].cx+32, p2.arma.b[colpi2].cy+32, p2.arma.b[colpi2].radius, al_map_rgb(142,44,2));
           p2.arma.b[colpi2].cx += p2.arma.b[colpi2].velocity;
           if(p2.arma.b[colpi2].cx >= Swidth){ p2.arma.b[colpi2].live = false;}
         }else p2.arma.b[colpi2].live = false;
 
         if( p2.arma.b[colpi2+1].live == true && !check_collision(obstacles, player, colpi2+1, colpi2)){
-          al_draw_filled_circle(p2.arma.b[colpi2+1].cx+32, p2.arma.b[colpi2+1].cy+32, p2.arma.b[colpi2+1].radius, al_map_rgb(255,0,0));
+          al_draw_filled_circle(p2.arma.b[colpi2+1].cx+32, p2.arma.b[colpi2+1].cy+32, p2.arma.b[colpi2+1].radius, al_map_rgb(142,44,2));
           p2.arma.b[colpi2+1].cx += p2.arma.b[colpi2+1].velocity;
           if(p2.arma.b[colpi2+1].cx >= Swidth){ p2.arma.b[colpi2+1].live = false;}
 
 
         }else p2.arma.b[colpi2+1].live = false;
         if( p2.arma.b[colpi2+2].live == true && !check_collision(obstacles, player, colpi2+2, colpi2)){
-          al_draw_filled_circle(p2.arma.b[colpi2+2].cx+32, p2.arma.b[colpi2+2].cy+32, p2.arma.b[colpi2+2].radius, al_map_rgb(255,0,0));
+          al_draw_filled_circle(p2.arma.b[colpi2+2].cx+32, p2.arma.b[colpi2+2].cy+32, p2.arma.b[colpi2+2].radius, al_map_rgb(142,44,2));
           p2.arma.b[colpi2+2].cx += p2.arma.b[colpi2+2].velocity;
           if(p2.arma.b[colpi2+2].cx >= Swidth){ p2.arma.b[colpi2+2].live = false; }
 

@@ -6,7 +6,7 @@
 /** vita dei player */
 #define LIFE 100
 /** velocità di movimento dei player */
-#define MOVESPEED 12
+#define MOVESPEED 2.5
 /** 2.5 */
 /** Numero items da generare */
 #define NUM_ITEMS 6
