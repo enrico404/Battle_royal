@@ -12,8 +12,10 @@
 
 void genWeaponsArray(weapon WArray[], weapon bazooka, weapon rifle, weapon heart);
 
-/** funzione per settare le coordinate delle armi sulla mappa */
-void set_position_on_map(weapon WArray[]);
+/** funzione per settare le coordinate delle armi sulla mappa 1 */
+void set_position_on_map1(weapon WArray[]);
+/** funzione per settare le coordinate delle armi sulla mappa 2 */
+void set_position_on_map2(weapon WArray[]);
 
 /** funzione per verificare se l'array delle armi è vuoto */
 bool is_emptyA(weapon WArray[]);

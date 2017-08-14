@@ -24,7 +24,7 @@
 #define COL 6
 
 /** costante numero ostacoli nella mappa */
-#define NUM_OBSTACLES 30
+#define NUM_OBSTACLES 40
 
 /** numero colpi bazooka */
 #define NbulletBazooka 10

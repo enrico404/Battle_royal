@@ -47,7 +47,7 @@ struct Barrier{
   int width;
   int height;
   char rotation;
-  bool base;
+  int id;
 
 
 };
