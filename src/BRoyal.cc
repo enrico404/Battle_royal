@@ -196,6 +196,11 @@ int main(int argc, char **argv)
     ALLEGRO_BITMAP *ground = al_load_bitmap("../media/ground.jpg");
     ALLEGRO_BITMAP *ground2 = al_load_bitmap("../media/ground2.jpg");
     ALLEGRO_BITMAP *ground3 = al_load_bitmap("../media/ground3.jpg");
+    ALLEGRO_BITMAP *sand = al_load_bitmap("../media/sand.jpg");
+    ALLEGRO_BITMAP *water = al_load_bitmap("../media/water.png");
+    ALLEGRO_BITMAP *water2 = al_load_bitmap("../media/water2.png");
+    ALLEGRO_BITMAP *water3 = al_load_bitmap("../media/water3.png");
+
 
     /** carico texture ostacoli */
     ALLEGRO_BITMAP *rock = al_load_bitmap("../media/rock2.png");
@@ -205,6 +210,7 @@ int main(int argc, char **argv)
     ALLEGRO_BITMAP *rock3 = al_load_bitmap("../media/rock1.png");
     ALLEGRO_BITMAP *rock4 = al_load_bitmap("../media/rock4.png");
     ALLEGRO_BITMAP *wall = al_load_bitmap("../media/wall.png");
+    ALLEGRO_BITMAP *wallH = al_load_bitmap("../media/wallH.png");
     ALLEGRO_BITMAP *ostacolo = al_load_bitmap("../media/ostacolo.png");
     ALLEGRO_BITMAP *ostacolo2 = al_load_bitmap("../media/ostacolo2.png");
     ALLEGRO_BITMAP *ostacolo3 = al_load_bitmap("../media/ostacolo3.png");
@@ -212,6 +218,12 @@ int main(int argc, char **argv)
     ALLEGRO_BITMAP *cactus2 = al_load_bitmap("../media/cactus2.png");
     ALLEGRO_BITMAP *rock5 = al_load_bitmap("../media/rock5.png");
     ALLEGRO_BITMAP *rock6 = al_load_bitmap("../media/rock6.png");
+    ALLEGRO_BITMAP *palma = al_load_bitmap("../media/palma.png");
+    ALLEGRO_BITMAP *ostrica = al_load_bitmap("../media/ostrica.png");
+    ALLEGRO_BITMAP *ostrica2 = al_load_bitmap("../media/ostrica2.png");
+    ALLEGRO_BITMAP *albero2 = al_load_bitmap("../media/albero2.png");
+
+
 
 
 
@@ -304,13 +316,13 @@ int main(int argc, char **argv)
 
     if(mappa == 1){
     init_mappa1(obstacles);
-    set_position_on_map1(WArray);}
+    set_position_on_map(WArray, mappa);}
     if(mappa == 2){
     init_mappa2(obstacles);
-    set_position_on_map2(WArray);}
+    set_position_on_map(WArray, mappa);}
     if(mappa == 3){
-    init_mappa2(obstacles);
-    set_position_on_map2(WArray);}
+    init_mappa3(obstacles);
+    set_position_on_map(WArray, mappa);}
 
     //al_show_native_message_box(display, "Istruzioni","Comandi: ", "Player 1: FRECCE DIREZIONALI e CTLR per sparare. \nPlayer 2: W,A,S,D e J per sparare. \nEsc per uscire.",  NULL, ALLEGRO_MESSAGEBOX_WARN);
     //   ALLEGRO_TRANSFORM camera;
@@ -596,11 +608,11 @@ int main(int argc, char **argv)
       if(is_emptyA(WArray)){
           genWeaponsArray(WArray, bazooka, rifle, heart);
           if(mappa == 1)
-          set_position_on_map1(WArray);
+          set_position_on_map(WArray, mappa);
           if(mappa == 2)
-          set_position_on_map2(WArray);
+          set_position_on_map(WArray, mappa);
           if(mappa == 3)
-          set_position_on_map2(WArray);
+          set_position_on_map(WArray, mappa);
       }
 
 
@@ -614,18 +626,23 @@ int main(int argc, char **argv)
 
         if(mappa == 1){
           drawMap(map, ground,ground2);
-          draw_obstacles(obstacles, rock, rockH, wall, ostacolo, ostacolo2, ostacolo3, cactus, cactus2, rock5, rock6);
+          draw_obstacles(obstacles, rock2, rock2H, wall, ostacolo, ostacolo2, ostacolo3, cactus, cactus2, rock5, rock6, water, water2, water3, palma, ostrica, ostrica2, albero2);
 
         }
 
         if(mappa == 2 ){
           drawMap(map, ground3,ground3);
-          draw_obstacles(obstacles, rock2, rock2H, wall, ostacolo, ostacolo2, ostacolo3, cactus, cactus2, rock5,rock6);
+          draw_obstacles(obstacles, rock2, rock2H, wall, ostacolo, ostacolo2, ostacolo3, cactus, cactus2, rock5,rock6, water, water2, water3, palma, ostrica, ostrica2, albero2);
 
         }
 
-        if(mappa == 3)
-        drawMap(map, ground,ground2);
+        if(mappa == 3){
+          drawMap(map, sand,sand);
+          draw_obstacles(obstacles, rock2, rock2H, wall, ostacolo, ostacolo2, ostacolo3, cactus, cactus2, rock5,rock6, water, water2, water3, palma, ostrica, ostrica2, albero2);
+
+
+        }
+
         if(p1.arma.id == 2 ){
 
           drawBullet_rifle(obstacles, dir,sparo,1, p1.arma.numBullets, p2.arma.numBullets);
@@ -686,7 +703,6 @@ int main(int argc, char **argv)
     }
 
 
-
     /** dallocamento risorse */
 
     al_destroy_sample_instance(song);
@@ -702,9 +718,18 @@ int main(int argc, char **argv)
     al_destroy_bitmap(HeartTexture);
     al_destroy_bitmap(rifleTexture);
     al_destroy_bitmap(bazookaTexture);
+    al_destroy_bitmap(wallH);
+    al_destroy_bitmap(sand);
+    al_destroy_bitmap(water);
+    al_destroy_bitmap(water2);
+    al_destroy_bitmap(water3);
     al_destroy_bitmap(rock);
     al_destroy_bitmap(ostacolo);
     al_destroy_bitmap(ostacolo2);
+    al_destroy_bitmap(palma);
+    al_destroy_bitmap(ostrica);
+    al_destroy_bitmap(ostrica2);
+    al_destroy_bitmap(albero2);
     al_destroy_bitmap(cactus);
     al_destroy_bitmap(cactus2);
     al_destroy_bitmap(ostacolo3);

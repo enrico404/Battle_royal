@@ -7,7 +7,7 @@
 */
 
 /** funzione per il draw degli ostacoli nella mappa */
-void draw_obstacles(Barrier obstacles[], ALLEGRO_BITMAP *rock, ALLEGRO_BITMAP *rockH, ALLEGRO_BITMAP *wall,ALLEGRO_BITMAP *ostacolo, ALLEGRO_BITMAP *ostacolo2, ALLEGRO_BITMAP *ostacolo3,ALLEGRO_BITMAP *cactus, ALLEGRO_BITMAP *cactus2, ALLEGRO_BITMAP *rock5, ALLEGRO_BITMAP *rock6  );
+void draw_obstacles(Barrier obstacles[], ALLEGRO_BITMAP *rock, ALLEGRO_BITMAP *rockH, ALLEGRO_BITMAP *wall,ALLEGRO_BITMAP *ostacolo, ALLEGRO_BITMAP *ostacolo2, ALLEGRO_BITMAP *ostacolo3,ALLEGRO_BITMAP *cactus, ALLEGRO_BITMAP *cactus2, ALLEGRO_BITMAP *rock5, ALLEGRO_BITMAP *rock6 , ALLEGRO_BITMAP *water, ALLEGRO_BITMAP *water2, ALLEGRO_BITMAP *water3, ALLEGRO_BITMAP *palma, ALLEGRO_BITMAP *ostrica, ALLEGRO_BITMAP *ostrica2, ALLEGRO_BITMAP *albero2  );
 
 
 

@@ -59,36 +59,57 @@ void genWeaponsArray(weapon WArray[], weapon bazooka, weapon rifle, weapon heart
   // }
 }
 
-void set_position_on_map1(weapon WArray[]){
-  WArray[0].x = 750;
-  WArray[0].y = 600;
-  WArray[1].x = 450;
-  WArray[1].y = 100;
-  WArray[2].x = 800;
-  WArray[2].y = 100;
-  WArray[3].x = 250;
-  WArray[3].y = 600;
-  WArray[4].x = 1000;
-  WArray[4].y = 80;
-  WArray[5].x = 30;
-  WArray[5].y = 650;
+void set_position_on_map(weapon WArray[], int mappa){
+
+
+  if(mappa == 1){
+    WArray[0].x = 750;
+    WArray[0].y = 600;
+    WArray[1].x = 450;
+    WArray[1].y = 100;
+    WArray[2].x = 800;
+    WArray[2].y = 100;
+    WArray[3].x = 250;
+    WArray[3].y = 600;
+    WArray[4].x = 1000;
+    WArray[4].y = 80;
+    WArray[5].x = 30;
+    WArray[5].y = 650;
+  }
+  if(mappa == 2){
+    WArray[0].x = 380;
+    WArray[0].y = 450;
+    WArray[1].x = 280;
+    WArray[1].y = 310;
+    WArray[2].x = 800;
+    WArray[2].y = 200;
+    WArray[3].x = 500;
+    WArray[3].y = 600;
+
+    WArray[4].x = 1000;
+    WArray[4].y = 80;
+    WArray[5].x = 100;
+    WArray[5].y = 650;
+  }
+  if(mappa == 3){
+    WArray[0].x = 830;
+    WArray[0].y = 335;
+    WArray[1].x = 380;
+    WArray[1].y = 200;
+    WArray[2].x = 450;
+    WArray[2].y = 500;
+    WArray[3].x = 5;
+    WArray[3].y = 400;
+    WArray[4].x = 940;
+    WArray[4].y = 10;
+
+
+
+
+  }
 }
 
-void set_position_on_map2(weapon WArray[]){
-  WArray[0].x = 380;
-  WArray[0].y = 450;
-  WArray[1].x = 280;
-  WArray[1].y = 310;
-  WArray[2].x = 800;
-  WArray[2].y = 200;
-  WArray[3].x = 500;
-  WArray[3].y = 600;
 
-  WArray[4].x = 1000;
-  WArray[4].y = 80;
-  WArray[5].x = 100;
-  WArray[5].y = 650;
-}
 
 bool is_emptyA(weapon WArray[]){
   for(int i=0; i<NUM_ITEMS; i++)

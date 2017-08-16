@@ -35,7 +35,7 @@ extern player p1,p2;
 extern int counter;
 extern int counter2;
 
-void draw_obstacles(Barrier obstacles[], ALLEGRO_BITMAP *rock, ALLEGRO_BITMAP *rockH, ALLEGRO_BITMAP *wall,ALLEGRO_BITMAP *ostacolo, ALLEGRO_BITMAP *ostacolo2, ALLEGRO_BITMAP *ostacolo3, ALLEGRO_BITMAP *cactus, ALLEGRO_BITMAP *cactus2, ALLEGRO_BITMAP *rock5, ALLEGRO_BITMAP *rock6 ){
+void draw_obstacles(Barrier obstacles[], ALLEGRO_BITMAP *rock, ALLEGRO_BITMAP *rockH, ALLEGRO_BITMAP *wall,ALLEGRO_BITMAP *ostacolo, ALLEGRO_BITMAP *ostacolo2, ALLEGRO_BITMAP *ostacolo3, ALLEGRO_BITMAP *cactus, ALLEGRO_BITMAP *cactus2, ALLEGRO_BITMAP *rock5, ALLEGRO_BITMAP *rock6, ALLEGRO_BITMAP *water, ALLEGRO_BITMAP *water2, ALLEGRO_BITMAP *water3,  ALLEGRO_BITMAP *palma, ALLEGRO_BITMAP *ostrica, ALLEGRO_BITMAP *ostrica2, ALLEGRO_BITMAP *albero2 ){
   int j=0;
   while(j<NUM_OBSTACLES){
     if(obstacles[j].id == 1){ al_draw_bitmap(wall, obstacles[j].x, obstacles[j].y, ALLEGRO_FLIP_VERTICAL); }
@@ -62,7 +62,20 @@ void draw_obstacles(Barrier obstacles[], ALLEGRO_BITMAP *rock, ALLEGRO_BITMAP *r
     al_draw_bitmap(rock5, obstacles[j].x, (obstacles[j].y+15), NULL);
     if(obstacles[j].id == 9)
     al_draw_bitmap(rock6, obstacles[j].x, (obstacles[j].y+15), NULL);
-
+    if(obstacles[j].id == 10)
+    al_draw_bitmap(water, obstacles[j].x, (obstacles[j].y), NULL);
+    if(obstacles[j].id == 11)
+    al_draw_bitmap(water2, obstacles[j].x, (obstacles[j].y), NULL);
+    if(obstacles[j].id == 12)
+    al_draw_bitmap(water3, obstacles[j].x, (obstacles[j].y), NULL);
+    if(obstacles[j].id == 13)
+    al_draw_bitmap(palma, obstacles[j].x, (obstacles[j].y), NULL);
+    if(obstacles[j].id == 14)
+    al_draw_bitmap(ostrica, obstacles[j].x, (obstacles[j].y), NULL);
+    if(obstacles[j].id == 15)
+    al_draw_bitmap(ostrica2, obstacles[j].x, (obstacles[j].y), NULL);
+    if(obstacles[j].id == 16)
+    al_draw_bitmap(albero2, obstacles[j].x, (obstacles[j].y), NULL);
 
 
     j++;
