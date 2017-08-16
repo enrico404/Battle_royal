@@ -244,7 +244,7 @@ int main(int argc, char **argv)
     ALLEGRO_SAMPLE *RifleShot = al_load_sample("../media/Sounds/RifleShot.wav");
     ALLEGRO_SAMPLE *equipWeapon = al_load_sample("../media/Sounds/equipWeapon.wav");
     ALLEGRO_SAMPLE *lifeUp = al_load_sample("../media/Sounds/lifeUp.wav");
-    ALLEGRO_SAMPLE *Track1 = al_load_sample("../media/Sounds/Track1.wav");
+    ALLEGRO_SAMPLE *Track1 = al_load_sample("../media/Sounds/Track1_old.wav");
     ALLEGRO_SAMPLE *Track2 = al_load_sample("../media/Sounds/Track2.wav");
 
     damageR = al_load_sample("../media/Sounds/damageR.wav");
