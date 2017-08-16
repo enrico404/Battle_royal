@@ -24,7 +24,7 @@
 #define COL 6
 
 /** costante numero ostacoli nella mappa */
-#define NUM_OBSTACLES 30
+#define NUM_OBSTACLES 40
 
 /** numero colpi bazooka */
 #define NbulletBazooka 10
@@ -44,11 +44,11 @@
 /** danno della pistola */
 #define damagePistol 5;
 /** velocità colpo pistola */
-#define vel_pistol 15;
+#define vel_pistol 18;
 
 /**velocità colpo rifle. */
-#define vel_Rifle 15;
+#define vel_Rifle 18;
 /** danno colpo del rifle */
-#define damagerifle 15;
+#define damagerifle 10;
 /** numero colpi rifle */
 #define NbulletRifle 40

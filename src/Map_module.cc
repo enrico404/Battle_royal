@@ -50,21 +50,7 @@ bool getMap(ifstream &f1, int map[][COL]){
 }
 
 
-void drawMap(int map[][COL], ALLEGRO_BITMAP *ground,ALLEGRO_BITMAP *ground2){
 
-  for(int i =0; i<ROW; i++){
-    for(int j = 0; j<COL; j++){
-      if(map[i][j] == 0){
-        al_draw_bitmap_region(ground, 0, 0, BlockSize, BlockSize,  i*BlockSize, j*BlockSize, 0);
-      }
-      else {
-        al_draw_bitmap_region(ground2, 0, 0, BlockSize, BlockSize,  i*BlockSize, j*BlockSize, 0);
-      }
-
-    }
-  }
-
-}
 
 
 void genRandomMap(){

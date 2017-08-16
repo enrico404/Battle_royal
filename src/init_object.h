@@ -12,8 +12,9 @@
 /** funzione per l'inizializzazione dei player */
 void init_player(player &p, float x, float y, int life, float movespeed, int sx, int sy);
 
-void init_obstacles(Barrier obstacles[]);
-
+void init_mappa1(Barrier obstacles[]);
+void init_mappa2(Barrier obstacles[]);
+void init_mappa3(Barrier obstacles[]);
 
 void init_bullets(Bullet b[], int damage, int vel);
 

@@ -48,6 +48,8 @@ using namespace std;
 
 
 player p1,p2;
+
+/** Enumerato per la direzione dei giocatori */
 enum Direction {UP, LEFT, DOWN, RIGHT};
 
 
@@ -71,9 +73,11 @@ void stampaB(Bullet b[]){
 
 
 
-
+/** counter per i colpi del rifle del player 1 */
 int counter =0;
+/** counter per i colpi del rifle del player 2 */
 int counter2 = 0;
+
 
 
 int main(int argc, char **argv)
@@ -93,19 +97,23 @@ int main(int argc, char **argv)
 
   float i;
 
-
+  /** booleano che indica se il player 1 sta sparando */
   bool sparo=false;
+  /** booleano che indica se il player 2 sta sparando */
   bool sparo2 = false;
 
 
 
   bool active = false;
   bool active2 = false;
-  int dir2 = UP;
+
+  /** direzione del player 1 */
   int dir = DOWN;
+  /** direzione del player 2 */
+  int dir2 = UP;
 
 
-
+  int mappa = 1; //mappa scelta, default 1
   char life[10] = "life: ";
   char vita[10];
 
@@ -125,10 +133,13 @@ int main(int argc, char **argv)
 
   init_player(p1, 10, 50, LIFE, MOVESPEED, 64, 0);
   init_player(p2, 1000, 620, LIFE, MOVESPEED, 64, 0);
-  init_obstacles(obstacles);
 
-  genWeaponsArray(WArray, bazooka, rifle, heart);
-  set_position_on_map(WArray);
+
+
+
+  //init_obstacles(obstacles);
+
+
 
 
   if(!al_init()){
@@ -184,25 +195,65 @@ int main(int argc, char **argv)
 
     ALLEGRO_BITMAP *ground = al_load_bitmap("../media/ground.jpg");
     ALLEGRO_BITMAP *ground2 = al_load_bitmap("../media/ground2.jpg");
+    ALLEGRO_BITMAP *ground3 = al_load_bitmap("../media/ground3.jpg");
+    ALLEGRO_BITMAP *sand = al_load_bitmap("../media/sand.jpg");
+    ALLEGRO_BITMAP *water = al_load_bitmap("../media/water.png");
+    ALLEGRO_BITMAP *water2 = al_load_bitmap("../media/water2.png");
+    ALLEGRO_BITMAP *water3 = al_load_bitmap("../media/water3.png");
+
+
     /** carico texture ostacoli */
     ALLEGRO_BITMAP *rock = al_load_bitmap("../media/rock2.png");
     ALLEGRO_BITMAP *rockH = al_load_bitmap("../media/rock2H.png");
+    ALLEGRO_BITMAP *rock2 = al_load_bitmap("../media/rock3.png");
+    ALLEGRO_BITMAP *rock2H = al_load_bitmap("../media/rock3H.png");
+    ALLEGRO_BITMAP *rock3 = al_load_bitmap("../media/rock1.png");
+    ALLEGRO_BITMAP *rock4 = al_load_bitmap("../media/rock4.png");
     ALLEGRO_BITMAP *wall = al_load_bitmap("../media/wall.png");
+    ALLEGRO_BITMAP *wallH = al_load_bitmap("../media/wallH.png");
+    ALLEGRO_BITMAP *ostacolo = al_load_bitmap("../media/ostacolo.png");
+    ALLEGRO_BITMAP *ostacolo2 = al_load_bitmap("../media/ostacolo2.png");
+    ALLEGRO_BITMAP *ostacolo3 = al_load_bitmap("../media/ostacolo3.png");
+    ALLEGRO_BITMAP *cactus = al_load_bitmap("../media/cactus.png");
+    ALLEGRO_BITMAP *cactus2 = al_load_bitmap("../media/cactus2.png");
+    ALLEGRO_BITMAP *rock5 = al_load_bitmap("../media/rock5.png");
+    ALLEGRO_BITMAP *rock6 = al_load_bitmap("../media/rock6.png");
+    ALLEGRO_BITMAP *palma = al_load_bitmap("../media/palma.png");
+    ALLEGRO_BITMAP *ostrica = al_load_bitmap("../media/ostrica.png");
+    ALLEGRO_BITMAP *ostrica2 = al_load_bitmap("../media/ostrica2.png");
+    ALLEGRO_BITMAP *albero2 = al_load_bitmap("../media/albero2.png");
+
+
+
+
+
+
+
     /** carico texture oggetti*/
     ALLEGRO_BITMAP *bazookaTexture = al_load_bitmap("../media/Rocket_Launcher.png");
     ALLEGRO_BITMAP *rifleTexture = al_load_bitmap("../media/rifle.png");
     ALLEGRO_BITMAP *HeartTexture = al_load_bitmap("../media/HeartTexture.png");
 
+    /** Carico texture menu */
+    ALLEGRO_BITMAP *menu1 = al_load_bitmap("../media/BRmenu.png");
+    ALLEGRO_BITMAP *menu2 = al_load_bitmap("../media/BRmenu2.png");
+    ALLEGRO_BITMAP *menu3 = al_load_bitmap("../media/BRmenu3.png");
     /** carico samples per gli effetti sonori */
     ALLEGRO_SAMPLE *pistolShot = al_load_sample("../media/Sounds/pistolShot.wav");
     ALLEGRO_SAMPLE *BazookaShot = al_load_sample("../media/Sounds/BazookaShot.wav");
     ALLEGRO_SAMPLE *RifleShot = al_load_sample("../media/Sounds/RifleShot.wav");
     ALLEGRO_SAMPLE *equipWeapon = al_load_sample("../media/Sounds/equipWeapon.wav");
     ALLEGRO_SAMPLE *lifeUp = al_load_sample("../media/Sounds/lifeUp.wav");
+    ALLEGRO_SAMPLE *Track1 = al_load_sample("../media/Sounds/Track1.wav");
+    ALLEGRO_SAMPLE *Track2 = al_load_sample("../media/Sounds/Track2.wav");
 
     damageR = al_load_sample("../media/Sounds/damageR.wav");
     damageL = al_load_sample("../media/Sounds/damageL.wav");
 
+
+    ALLEGRO_SAMPLE_INSTANCE *song = al_create_sample_instance(Track1);
+    al_set_sample_instance_playmode(song, ALLEGRO_PLAYMODE_LOOP);
+    al_attach_sample_instance_to_mixer(song, al_get_default_mixer());
     /** coda eventi  */
 
     ALLEGRO_TIMER *timer = al_create_timer(1.0/FPS);
@@ -211,8 +262,69 @@ int main(int argc, char **argv)
     al_register_event_source(event_queue, al_get_timer_event_source(timer));
     al_register_event_source(event_queue, al_get_display_event_source(display));
 
+    al_play_sample_instance(song); //faccio partire la canzone di sottofondo
 
-    al_show_native_message_box(display, "Istruzioni","Comandi: ", "Player 1: FRECCE DIREZIONALI e CTLR per sparare. \nPlayer 2: W,A,S,D e J per sparare. \nEsc per uscire.",  NULL, ALLEGRO_MESSAGEBOX_WARN);
+    // ---------visualizzazione menu --------------------------------
+
+    al_draw_bitmap(menu1, 0,0,NULL);
+    al_flip_display();
+
+
+    while(menu){
+
+      ALLEGRO_EVENT events;
+      al_wait_for_event(event_queue, &events);
+
+      if(events.type == ALLEGRO_EVENT_KEY_DOWN){
+        switch (events.keyboard.keycode) {
+          case ALLEGRO_KEY_1:
+          //visualizza immagine 1
+          al_play_sample(Track2, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+          al_draw_bitmap(menu1, 0,0,NULL);
+          mappa = 1;
+
+          break;
+          case ALLEGRO_KEY_2:
+          al_play_sample(Track2, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+          al_draw_bitmap(menu2, 0,0,NULL);
+          mappa = 2;
+
+          break;
+          case ALLEGRO_KEY_3:
+          al_play_sample(Track2, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+          al_draw_bitmap(menu3, 0,0,NULL);
+          mappa = 3;
+          break;
+          al_play_sample(Track2, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+          case ALLEGRO_KEY_ENTER:
+          menu = false;
+          break;
+          case ALLEGRO_KEY_ESCAPE:
+          menu = false;
+          work = false;
+          break;
+        }
+
+
+      }
+      al_flip_display();
+
+
+    }
+
+    genWeaponsArray(WArray, bazooka, rifle, heart);
+
+    if(mappa == 1){
+    init_mappa1(obstacles);
+    set_position_on_map(WArray, mappa);}
+    if(mappa == 2){
+    init_mappa2(obstacles);
+    set_position_on_map(WArray, mappa);}
+    if(mappa == 3){
+    init_mappa3(obstacles);
+    set_position_on_map(WArray, mappa);}
+
+    //al_show_native_message_box(display, "Istruzioni","Comandi: ", "Player 1: FRECCE DIREZIONALI e CTLR per sparare. \nPlayer 2: W,A,S,D e J per sparare. \nEsc per uscire.",  NULL, ALLEGRO_MESSAGEBOX_WARN);
     //   ALLEGRO_TRANSFORM camera;
 
     genRandomMap();
@@ -495,7 +607,12 @@ int main(int argc, char **argv)
       //se non ci sono più armi sul terreno di gioco, le rigenero
       if(is_emptyA(WArray)){
           genWeaponsArray(WArray, bazooka, rifle, heart);
-          set_position_on_map(WArray);
+          if(mappa == 1)
+          set_position_on_map(WArray, mappa);
+          if(mappa == 2)
+          set_position_on_map(WArray, mappa);
+          if(mappa == 3)
+          set_position_on_map(WArray, mappa);
       }
 
 
@@ -506,7 +623,26 @@ int main(int argc, char **argv)
         sprintf(vita,"%d",p1.life);
         sprintf(colpiP1, "%d", p1.arma.numBullets);
         sprintf(colpiP2, "%d", p2.arma.numBullets);
-        drawMap(map, ground,ground2);
+
+        if(mappa == 1){
+          drawMap(map, ground,ground2);
+          draw_obstacles(obstacles, rock2, rock2H, wall, ostacolo, ostacolo2, ostacolo3, cactus, cactus2, rock5, rock6, water, water2, water3, palma, ostrica, ostrica2, albero2);
+
+        }
+
+        if(mappa == 2 ){
+          drawMap(map, ground3,ground3);
+          draw_obstacles(obstacles, rock2, rock2H, wall, ostacolo, ostacolo2, ostacolo3, cactus, cactus2, rock5,rock6, water, water2, water3, palma, ostrica, ostrica2, albero2);
+
+        }
+
+        if(mappa == 3){
+          drawMap(map, sand,sand);
+          draw_obstacles(obstacles, rock2, rock2H, wall, ostacolo, ostacolo2, ostacolo3, cactus, cactus2, rock5,rock6, water, water2, water3, palma, ostrica, ostrica2, albero2);
+
+
+        }
+
         if(p1.arma.id == 2 ){
 
           drawBullet_rifle(obstacles, dir,sparo,1, p1.arma.numBullets, p2.arma.numBullets);
@@ -522,7 +658,7 @@ int main(int argc, char **argv)
         else
         drawBullet(obstacles, dir2,sparo2,2, p1.arma.numBullets,p2.arma.numBullets);
 
-        draw_obstacles(obstacles, rock, rockH, wall);
+
 
 
         draw_items(WArray, bazookaTexture, rifleTexture, HeartTexture);
@@ -567,8 +703,11 @@ int main(int argc, char **argv)
     }
 
 
-
     /** dallocamento risorse */
+
+    al_destroy_sample_instance(song);
+    al_destroy_sample(Track1);
+    al_destroy_sample(Track2);
     al_destroy_sample(damageL);
     al_destroy_sample(damageR);
     al_destroy_sample(lifeUp);
@@ -579,13 +718,37 @@ int main(int argc, char **argv)
     al_destroy_bitmap(HeartTexture);
     al_destroy_bitmap(rifleTexture);
     al_destroy_bitmap(bazookaTexture);
+    al_destroy_bitmap(wallH);
+    al_destroy_bitmap(sand);
+    al_destroy_bitmap(water);
+    al_destroy_bitmap(water2);
+    al_destroy_bitmap(water3);
     al_destroy_bitmap(rock);
-    al_destroy_bitmap(wall);
+    al_destroy_bitmap(ostacolo);
+    al_destroy_bitmap(ostacolo2);
+    al_destroy_bitmap(palma);
+    al_destroy_bitmap(ostrica);
+    al_destroy_bitmap(ostrica2);
+    al_destroy_bitmap(albero2);
+    al_destroy_bitmap(cactus);
+    al_destroy_bitmap(cactus2);
+    al_destroy_bitmap(ostacolo3);
     al_destroy_bitmap(rockH);
+    al_destroy_bitmap(rock2);
+    al_destroy_bitmap(rock2H);
+    al_destroy_bitmap(rock3);
+    al_destroy_bitmap(rock5);
+    al_destroy_bitmap(rock6);
+    al_destroy_bitmap(rock4);
+    al_destroy_bitmap(wall);
     al_destroy_bitmap(ground);
     al_destroy_bitmap(ground2);
+    al_destroy_bitmap(ground3);
     al_destroy_bitmap(player);
     al_destroy_bitmap(player2);
+    al_destroy_bitmap(menu1);
+    al_destroy_bitmap(menu2);
+    al_destroy_bitmap(menu3);
     al_destroy_bitmap(playerRifle);
     al_destroy_bitmap(player2Rifle);
     al_destroy_bitmap(playerBazooka);

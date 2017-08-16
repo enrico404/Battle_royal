@@ -62,9 +62,9 @@ void init_player(player &p, float x, float y, int life, float movespeed, int sx,
 
 }
 
-/** funzione principale per l'inizializzazione degli ostacoli sulla mappa */
+/** funzione principale per l'inizializzazione della prima mappa */
 
-void init_obstacles(Barrier obstacles[]){
+void init_mappa1(Barrier obstacles[]){
 
   for(int i=0; i<NUM_OBSTACLES; i++){
     obstacles[i].x = 9999;
@@ -72,86 +72,272 @@ void init_obstacles(Barrier obstacles[]){
     obstacles[i].width = 60;
     obstacles[i].height = 100;
     obstacles[i].rotation = 'v';
-    obstacles[i].base = false;
+
   }
   int i=0;
   //VERTICAL OBSTACLES.
   //base player 1
   obstacles[i].x=100;
   obstacles[i].y=0;
-  obstacles[i].base=true;
+  obstacles[i].id = 1;
   obstacles[++i].x=100;
   obstacles[i].y=100;
-  obstacles[i].base=true;
+  obstacles[i].id = 1;
   obstacles[++i].x = 100;
   obstacles[i].y = 200;
-  obstacles[i].base=true;
+  obstacles[i].id = 1;
   obstacles[++i].x = 100;
   obstacles[i].y = 720;
-  obstacles[i].base=true;
+  obstacles[i].id = 1;
   obstacles[++i].x = 100;
   obstacles[i].y = 620;
-  obstacles[i].base=true;
+  obstacles[i].id = 1;
   obstacles[++i].x = 100;
   obstacles[i].y = 520;
-  obstacles[i].base=true;
+  obstacles[i].id = 1;
   //base player 2
   obstacles[++i].x=Swidth-200;
   obstacles[i].y=0;
-  obstacles[i].base=true;
+  obstacles[i].id = 1;
   obstacles[++i].x=Swidth-200;
   obstacles[i].y=100;
-  obstacles[i].base=true;
+  obstacles[i].id = 1;
   obstacles[++i].x = Swidth-200;
   obstacles[i].y = 200;
-  obstacles[i].base=true;
+  obstacles[i].id = 1;
   obstacles[++i].x = Swidth-200;
   obstacles[i].y = 720;
-  obstacles[i].base=true;
+  obstacles[i].id = 1;
   obstacles[++i].x = Swidth-200;
   obstacles[i].y = 620;
-  obstacles[i].base=true;
+  obstacles[i].id = 1;
   obstacles[++i].x = Swidth-200;
   obstacles[i].y = 520;
-  obstacles[i].base=true;
+  obstacles[i].id = 1;
 
   //parte centrale
   obstacles[++i].x = 420;
   obstacles[i].y = 500;
+  obstacles[i].id = 2;
   obstacles[++i].x = 420;
   obstacles[i].y = 400;
+  obstacles[i].id = 2;
   obstacles[++i].x = 620;
   obstacles[i].y = 280;
+  obstacles[i].id = 2;
   obstacles[++i].x = 620;
   obstacles[i].y = 180;
+  obstacles[i].id = 2;
   obstacles[++i].x = 620;
   obstacles[i].y = 80;
+  obstacles[i].id = 2;
 
   //parte destra staccata
   obstacles[++i].x = 650;
   obstacles[i].y = 600;
+  obstacles[i].id = 2;
   obstacles[++i].x = 650;
   obstacles[i].y = 500;
+  obstacles[i].id = 2;
 
   //parte sinistra staccata
   obstacles[++i].x = 350;
   obstacles[i].y = 0;
+  obstacles[i].id = 2;
   obstacles[++i].x = 350;
   obstacles[i].y = 100;
+  obstacles[i].id = 2;
 
   //HORIZONTAL OBSTACLES
   obstacles[++i].x = 420;
   obstacles[i].y = 340;
   obstacles[i].rotation = 'h';
+  obstacles[i].id = 2;
   obstacles[i].width = 100;
   obstacles[i].height = 60;
   obstacles[++i].x = 520;
   obstacles[i].y = 340;
+  obstacles[i].rotation = 'h';
+  obstacles[i].id = 2;
   obstacles[i].width = 100;
   obstacles[i].height = 60;
-  obstacles[i].rotation = 'h';
 
 }
+
+
+void init_mappa2(Barrier obstacles[]){
+  for(int i=0; i<NUM_OBSTACLES; i++){
+    obstacles[i].x = 9999;
+    obstacles[i].y = 9999;
+    obstacles[i].width = 150;
+    obstacles[i].height = 150;
+    obstacles[i].rotation = 'v';
+
+  }
+  int i=0;
+  //CENTRAL OBSTACLES
+  obstacles[i].x=320;
+  obstacles[i].y=250;
+  obstacles[i].id = 3;
+  obstacles[++i].x=175;
+  obstacles[i].y=350;
+  obstacles[i].id = 3;
+  obstacles[++i].x=470;
+  obstacles[i].y=250;
+  obstacles[i].id = 4;
+  obstacles[++i].x = 620;
+  obstacles[i].y = 250;
+  obstacles[i].id = 5;
+
+
+  //cactus
+  obstacles[++i].x=1060;
+  obstacles[i].y=60;
+  obstacles[i].id = 7;
+  obstacles[i].width = 55;
+  obstacles[i].height = 83;
+  obstacles[++i].x=30;
+  obstacles[i].y=610;
+  obstacles[i].id = 6;
+  obstacles[i].width = 36;
+  obstacles[i].height = 54;
+
+  //rock
+  obstacles[++i].x=500;
+  obstacles[i].y=30;
+  obstacles[i].id = 8;
+  obstacles[i].width = 62;
+  obstacles[i].height = 55;
+  obstacles[++i].x=400;
+  obstacles[i].y=640;
+  obstacles[i].id = 9;
+  obstacles[i].width = 47;
+  obstacles[i].height = 44;
+
+
+}
+
+void init_mappa3(Barrier obstacles[]){
+  for(int i=0; i<NUM_OBSTACLES; i++){
+    obstacles[i].x = 9999;
+    obstacles[i].y = 9999;
+    obstacles[i].width = 100;
+    obstacles[i].height = 60;
+    obstacles[i].rotation = 'v';
+
+  }
+  int i=0;
+  //WATER
+  obstacles[i].x=0;
+  obstacles[i].y=320;
+  obstacles[i].id = 10;
+  obstacles[++i].x=100;
+  obstacles[i].y=320;
+  obstacles[i].id = 10;
+  obstacles[++i].x=200;
+  obstacles[i].y=320;
+  obstacles[i].id = 10;
+  obstacles[++i].x = 300;
+  obstacles[i].y = 320;
+  obstacles[i].id = 10;
+  obstacles[++i].x=400;
+  obstacles[i].y=320;
+  obstacles[i].id = 10;
+  obstacles[++i].x=500;
+  obstacles[i].y=320;
+  obstacles[i].id = 10;
+  obstacles[++i].x=600;
+  obstacles[i].y=320;
+  obstacles[i].id = 10;
+  obstacles[++i].x = 700;
+  obstacles[i].y = 320;
+  obstacles[i].id = 11;
+
+  obstacles[++i].x=900;
+  obstacles[i].y=320;
+  obstacles[i].id = 12;
+  obstacles[++i].x=1000;
+  obstacles[i].y=320;
+  obstacles[i].id = 10;
+
+  //albero2
+  obstacles[++i].x=1000;
+  obstacles[i].y=100;
+  obstacles[i].id = 16;
+  obstacles[i].width = 70;
+  obstacles[i].height = 100;
+  obstacles[++i].x=1000;
+  obstacles[i].y=-20;
+  obstacles[i].id = 16;
+  obstacles[i].width = 70;
+  obstacles[i].height = 100;
+  obstacles[++i].x=950;
+  obstacles[i].y = 65;
+  obstacles[i].id = 16;
+  obstacles[i].width = 70;
+  obstacles[i].height = 100;
+  obstacles[++i].x=800;
+  obstacles[i].y=600;
+  obstacles[i].id = 16;
+  obstacles[i].width = 70;
+  obstacles[i].height = 100;
+
+
+
+
+  //palma
+  obstacles[++i].x=50;
+  obstacles[i].y=600;
+  obstacles[i].id = 13;
+  obstacles[i].width = 62;
+  obstacles[i].height = 71;
+  obstacles[++i].x=110;
+  obstacles[i].y=600;
+  obstacles[i].id = 13;
+  obstacles[i].width = 62;
+  obstacles[i].height = 71;
+  obstacles[++i].x=50;
+  obstacles[i].y=530;
+  obstacles[i].id = 13;
+  obstacles[i].width = 62;
+  obstacles[i].height = 71;
+  obstacles[++i].x=20;
+  obstacles[i].y=240;
+  obstacles[i].id = 13;
+  obstacles[i].width = 62;
+  obstacles[i].height = 71;
+
+  //ostriche
+  obstacles[++i].x=112;
+  obstacles[i].y=530;
+  obstacles[i].id = 14;
+  obstacles[i].width = 22;
+  obstacles[i].height = 25;
+  obstacles[++i].x=1025;
+  obstacles[i].y=530;
+  obstacles[i].id = 15;
+  obstacles[i].width = 10;
+  obstacles[i].height = 10;
+  obstacles[++i].x=12;
+  obstacles[i].y=120;
+  obstacles[i].id = 14;
+  obstacles[i].width = 22;
+  obstacles[i].height = 25;
+  obstacles[++i].x=1002;
+  obstacles[i].y=530;
+  obstacles[i].id = 14;
+  obstacles[i].width = 22;
+  obstacles[i].height = 25;
+  obstacles[++i].x=700;
+  obstacles[i].y=130;
+  obstacles[i].id = 14;
+  obstacles[i].width = 22;
+  obstacles[i].height = 25;
+
+
+
+}
+
 
 void init_bullets(Bullet b[], int damage, int vel){
   for(int i=0; i<NbulletPistol; i++){

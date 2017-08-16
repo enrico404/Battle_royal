@@ -78,13 +78,13 @@ bool check_collision_player(Barrier obstacles[], int player){
 bool check_collision(Barrier obstacles[], int player, int colpi1, int colpi2){
   if(player == 1 && p1.arma.b[colpi1].live == true){
     if(collision(p1.arma.b[colpi1].cx, p1.arma.b[colpi1].cy, p2.x, p2.y, p1.arma.b[colpi1].radius+5, p1.arma.b[colpi1].radius+5, 64,64)){
-      if(!al_play_sample(damageR, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL)) std::cout << "erroreWIWI" << '\n';;
+      if(!al_play_sample(damageR, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL)) std::cout << "errore" << '\n';
       p2.life -= p1.arma.b[colpi1].Damage;
       cout<<"damage"<<endl;
       return true;
     }
     for(int i=0;i<NUM_OBSTACLES; i++){
-      if(collision(p1.arma.b[colpi1].cx, p1.arma.b[colpi1].cy, obstacles[i].x, obstacles[i].y, p1.arma.b[colpi1].radius+5, p1.arma.b[colpi1].radius+5, obstacles[i].width,obstacles[i].height) ){
+      if(collision(p1.arma.b[colpi1].cx, p1.arma.b[colpi1].cy, obstacles[i].x, obstacles[i].y, p1.arma.b[colpi1].radius+5, p1.arma.b[colpi1].radius+5, obstacles[i].width,obstacles[i].height) && obstacles[i].id != 10 && obstacles[i].id != 11 && obstacles[i].id != 12){
         return true;
       }
     }
@@ -98,7 +98,7 @@ bool check_collision(Barrier obstacles[], int player, int colpi1, int colpi2){
       return true;
     }
     for(int i=0;i<NUM_OBSTACLES; i++){
-      if(collision(p2.arma.b[colpi2].cx, p2.arma.b[colpi2].cy, obstacles[i].x, obstacles[i].y, p2.arma.b[colpi2].radius+5, p2.arma.b[colpi2].radius+5, obstacles[i].width,obstacles[i].height) ){
+      if(collision(p2.arma.b[colpi2].cx, p2.arma.b[colpi2].cy, obstacles[i].x, obstacles[i].y, p2.arma.b[colpi2].radius+5, p2.arma.b[colpi2].radius+5, obstacles[i].width,obstacles[i].height) && obstacles[i].id != 10 && obstacles[i].id != 11 && obstacles[i].id != 12 ){
         return true;
       }
     }
