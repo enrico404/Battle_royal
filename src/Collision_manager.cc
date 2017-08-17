@@ -111,22 +111,22 @@ int check_collision_weapon(weapon WArray[], int player){
 
     for(int i=0; i<NUM_ITEMS; i++){
       if(collision(p1.x,p1.y,WArray[i].x, WArray[i].y, 64,64, 50, 26) && WArray[i].id !=0){
-        int tmp;
-        tmp = WArray[i].id;
+        int id;
+        id = WArray[i].id;
         WArray[i].id = 0;
         strcpy(WArray[i].nome, "nothing");
-        return tmp;
+        return id;
       }
     }
 
   }else if(player == 2){
     for(int i=0; i<NUM_ITEMS; i++){
       if(collision(p2.x,p2.y,WArray[i].x, WArray[i].y, 64,64, 50, 26) && WArray[i].id !=0){
-        int tmp;
-        tmp = WArray[i].id;
+        int id;
+        id = WArray[i].id;
         WArray[i].id = 0;
         strcpy(WArray[i].nome, "nothing");
-        return tmp;
+        return id;
       }
 
 

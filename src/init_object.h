@@ -10,7 +10,7 @@
 
 
 /** funzione per l'inizializzazione dei player */
-void init_player(player &p, float x, float y, int life, float movespeed, int sx, int sy);
+void init_player(player &p, float x, float y, int life, float movespeed, int sx, int sy, weapon pistol);
 
 void init_mappa1(Barrier obstacles[]);
 void init_mappa2(Barrier obstacles[]);
@@ -23,4 +23,6 @@ void init_bazooka(weapon &bazooka);
 void init_rifle(weapon &rifle);
 
 void init_heart(weapon &heart);
+
+void init_pistol(weapon &pistol);
 /* fine header modulo init_object */
