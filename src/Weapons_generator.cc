@@ -37,7 +37,7 @@ using namespace std;
 #include "time.h"
 #include <stdlib.h>
 
-void genWeaponsArray(weapon WArray[], weapon bazooka, weapon rifle, weapon heart){
+void genWeaponsArray(weapon WArray[], weapon bazooka, weapon rifle, weapon heart, weapon pistol){
   int i = 0;
   int r;
   weapon nothing;
@@ -45,11 +45,12 @@ void genWeaponsArray(weapon WArray[], weapon bazooka, weapon rifle, weapon heart
   strcpy(nothing.nome, "nothing");
   srand(time(0));
   while(i<NUM_ITEMS){
-    r = rand()%4;
+    r = rand()%5;
     if(r == 0){ WArray[i] = nothing; i++;}
     if(r == 1){ WArray[i] = bazooka; i++;}
     if(r == 2){ WArray[i] = rifle; i++;}
     if(r == 3){ WArray[i] = heart; i++;}
+    if(r == 4){ WArray[i] = pistol; i++;}
 
   }
 
@@ -102,7 +103,8 @@ void set_position_on_map(weapon WArray[], int mappa){
     WArray[3].y = 400;
     WArray[4].x = 940;
     WArray[4].y = 10;
-
+    WArray[5].x = 1020;
+    WArray[5].y = 260;
 
 
 

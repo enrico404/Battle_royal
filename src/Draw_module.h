@@ -16,6 +16,7 @@ void drawBullet(Barrier obstacles[], int dir, bool &sparo, int player, int colpi
 
 void drawBullet_rifle(Barrier obstacles[], int dir, bool &sparo, int player, int colpi1, int colpi2);
 
+
 /** visualizzazione della mappa (viene visualizzata ad assi invertiti rispetto al file txt) */
 
 void drawMap(int map[][COL], ALLEGRO_BITMAP *ground,ALLEGRO_BITMAP *ground2);
@@ -28,5 +29,5 @@ void drawLife(ALLEGRO_FONT *font, float x, float y, char *vita, int life );
 /**
 * funzione per il draw delle armi all'interno della mappa
 */
-void draw_items(weapon WArray[], ALLEGRO_BITMAP *bazooka, ALLEGRO_BITMAP *rifle, ALLEGRO_BITMAP *heart);
+void draw_items(weapon WArray[], ALLEGRO_BITMAP *bazooka, ALLEGRO_BITMAP *rifle, ALLEGRO_BITMAP *heart, ALLEGRO_BITMAP *pistol);
 /* Fine header modulo draw */

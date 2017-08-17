@@ -37,28 +37,14 @@ extern player p2;
 ALLEGRO_SAMPLE *damageL;
 ALLEGRO_SAMPLE *damageR;
 
-void init_player(player &p, float x, float y, int life, float movespeed, int sx, int sy){
+void init_player(player &p, float x, float y, int life, float movespeed, int sx, int sy, weapon pistol){
   p.x  = x;
   p.y = y;
   p.life = life;
   p.movespeed = movespeed;
   p.sourceX = sx;
   p.sourceY = sy;
-  strcpy(p.arma.nome, "pistol");
-  p.arma.id = 4;
-  p.arma.numBullets = NbulletPistol;
-  p.arma.x =0;
-  p.arma.y = 0;
-  p.arma.b = new Bullet[NbulletPistol];
-  for(int i=0; i<p.arma.numBullets; i++){
-    p.arma.b[i].live = false;
-    p.arma.b[i].cx = 9999;
-    p.arma.b[i].cy =9999;
-    p.arma.b[i].velocity = vel_pistol;
-    p.arma.b[i].radius = radiusB;
-    p.arma.b[i].Damage = damagePistol;
-  }
-
+  p.arma = pistol;
 
 }
 
@@ -370,6 +356,25 @@ void init_bazooka(weapon &bazooka){
   bazooka.x = 9999;
   bazooka.y = 9999;
 }
+
+
+void init_pistol(weapon &pistol){
+  strcpy(pistol.nome, "pistol");
+  pistol.id = 4;
+  pistol.numBullets = NbulletPistol;
+  pistol.x =9999;
+  pistol.y = 9999;
+  pistol.b = new Bullet[NbulletPistol];
+  for(int i=0; i<pistol.numBullets; i++){
+    pistol.b[i].live = false;
+    pistol.b[i].cx = 9999;
+    pistol.b[i].cy =9999;
+    pistol.b[i].velocity = vel_pistol;
+    pistol.b[i].radius = radiusB;
+    pistol.b[i].Damage = damagePistol;
+  }
+}
+
 
 void init_rifle(weapon &rifle){
   rifle.id = 2;
