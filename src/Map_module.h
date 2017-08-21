@@ -9,6 +9,7 @@
 
 
 /** funzione che dato in input il file della mappa, compila la matrice map */
+
 bool getMap(ifstream &f1, int map[][COL]);
 
 

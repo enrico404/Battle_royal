@@ -49,33 +49,33 @@ void draw_obstacles(Barrier obstacles[], ALLEGRO_BITMAP *rock, ALLEGRO_BITMAP *r
     }
 
     if(obstacles[j].id == 3)
-    al_draw_bitmap(ostacolo, obstacles[j].x+15, (obstacles[j].y+20), NULL);
+    al_draw_bitmap(ostacolo, obstacles[j].x+15, (obstacles[j].y+20), 0);
     if(obstacles[j].id == 4)
-    al_draw_bitmap(ostacolo2, obstacles[j].x, (obstacles[j].y+20), NULL);
+    al_draw_bitmap(ostacolo2, obstacles[j].x, (obstacles[j].y+20), 0);
     if(obstacles[j].id == 5)
-    al_draw_bitmap(ostacolo3, obstacles[j].x-10, (obstacles[j].y+20), NULL);
+    al_draw_bitmap(ostacolo3, obstacles[j].x-10, (obstacles[j].y+20), 0);
     if(obstacles[j].id == 6)
-    al_draw_bitmap(cactus, obstacles[j].x, (obstacles[j].y+10), NULL);
+    al_draw_bitmap(cactus, obstacles[j].x, (obstacles[j].y+10), 0);
     if(obstacles[j].id == 7)
-    al_draw_bitmap(cactus2, obstacles[j].x, (obstacles[j].y), NULL);
+    al_draw_bitmap(cactus2, obstacles[j].x, (obstacles[j].y), 0);
     if(obstacles[j].id == 8)
-    al_draw_bitmap(rock5, obstacles[j].x, (obstacles[j].y+15), NULL);
+    al_draw_bitmap(rock5, obstacles[j].x, (obstacles[j].y+15), 0);
     if(obstacles[j].id == 9)
-    al_draw_bitmap(rock6, obstacles[j].x, (obstacles[j].y+15), NULL);
+    al_draw_bitmap(rock6, obstacles[j].x, (obstacles[j].y+15), 0);
     if(obstacles[j].id == 10)
-    al_draw_bitmap(water, obstacles[j].x, (obstacles[j].y), NULL);
+    al_draw_bitmap(water, obstacles[j].x, (obstacles[j].y), 0);
     if(obstacles[j].id == 11)
-    al_draw_bitmap(water2, obstacles[j].x, (obstacles[j].y), NULL);
+    al_draw_bitmap(water2, obstacles[j].x, (obstacles[j].y), 0);
     if(obstacles[j].id == 12)
-    al_draw_bitmap(water3, obstacles[j].x, (obstacles[j].y), NULL);
+    al_draw_bitmap(water3, obstacles[j].x, (obstacles[j].y), 0);
     if(obstacles[j].id == 13)
-    al_draw_bitmap(palma, obstacles[j].x, (obstacles[j].y), NULL);
+    al_draw_bitmap(palma, obstacles[j].x, (obstacles[j].y), 0);
     if(obstacles[j].id == 14)
-    al_draw_bitmap(ostrica, obstacles[j].x, (obstacles[j].y), NULL);
+    al_draw_bitmap(ostrica, obstacles[j].x, (obstacles[j].y), 0);
     if(obstacles[j].id == 15)
-    al_draw_bitmap(ostrica2, obstacles[j].x, (obstacles[j].y), NULL);
+    al_draw_bitmap(ostrica2, obstacles[j].x, (obstacles[j].y), 0);
     if(obstacles[j].id == 16)
-    al_draw_bitmap(albero2, obstacles[j].x, (obstacles[j].y), NULL);
+    al_draw_bitmap(albero2, obstacles[j].x, (obstacles[j].y), 0);
 
 
     j++;
@@ -184,17 +184,19 @@ void drawLife(ALLEGRO_FONT *font, float x, float y, char *vita, int life ){
 
 
 
-void draw_items(weapon WArray[], ALLEGRO_BITMAP *bazooka, ALLEGRO_BITMAP *rifle, ALLEGRO_BITMAP *heart, ALLEGRO_BITMAP *pistol ){
+void draw_items(weapon WArray[], ALLEGRO_BITMAP *bazooka, ALLEGRO_BITMAP *rifle, ALLEGRO_BITMAP *heart, ALLEGRO_BITMAP *pistol, ALLEGRO_BITMAP *shotgun ){
   for(int i=0; i<NUM_ITEMS; i++){
-    if(strcmp(WArray[i].nome, "bazooka") == 0)
-    al_draw_bitmap(bazooka, WArray[i].x, WArray[i].y, NULL);
-    if(strcmp(WArray[i].nome, "pistol") == 0)
-    al_draw_bitmap(pistol, WArray[i].x, WArray[i].y, NULL);
-    if(strcmp(WArray[i].nome, "rifle") == 0)
-    al_draw_bitmap(rifle, WArray[i].x, WArray[i].y, NULL);
-    if(strcmp(WArray[i].nome, "heart") == 0)
-    al_draw_bitmap(heart, WArray[i].x, WArray[i].y, NULL);
-    if(strcmp(WArray[i].nome, "nothing") == 0)
+    if(WArray[i].id == 1)
+    al_draw_bitmap(bazooka, WArray[i].x, WArray[i].y, 0);
+    if(WArray[i].id == 4)
+    al_draw_bitmap(pistol, WArray[i].x, WArray[i].y, 0);
+    if(WArray[i].id == 2)
+    al_draw_bitmap(rifle, WArray[i].x, WArray[i].y, 0);
+    if(WArray[i].id == 3)
+    al_draw_bitmap(heart, WArray[i].x, WArray[i].y, 0);
+    if(WArray[i].id == 5)
+    al_draw_bitmap(shotgun, WArray[i].x, WArray[i].y, 0);
+    if(WArray[i].id == 0)
     continue;
   }
 
@@ -472,7 +474,254 @@ void drawBullet_rifle(Barrier obstacles[], int dir, bool &sparo, int player, int
 
 
 
+void drawBullet_shotgun(Barrier obstacles[], int dir, bool &sparo, int player, int colpi1, int colpi2){
 
+
+  if(sparo == true){
+    if(player==1){
+
+
+
+
+      if(dir == 0){ //UP
+
+        if(p1.arma.b[colpi1].live == true && !check_collision(obstacles, player, colpi1, colpi2)){
+          al_draw_filled_circle(p1.arma.b[colpi1].cx, p1.arma.b[colpi1].cy, p1.arma.b[colpi1].radius, al_map_rgb(142,44,2));
+          p1.arma.b[colpi1].cy -= p1.arma.b[colpi1].velocity;
+          if(p1.arma.b[colpi1].cy <= 0){ p1.arma.b[colpi1].live = false; }
+        }else p1.arma.b[colpi1].live = false;
+
+        if( p1.arma.b[colpi1+1].live == true && !check_collision(obstacles, player, colpi1+1, colpi2)){
+
+          al_draw_filled_circle(p1.arma.b[colpi1+1].cx+32, p1.arma.b[colpi1+1].cy, p1.arma.b[colpi1+1].radius, al_map_rgb(142,44,2));
+          p1.arma.b[colpi1+1].cy -= p1.arma.b[colpi1+1].velocity;
+          if(p1.arma.b[colpi1+1].cy <= 0){ p1.arma.b[colpi1+1].live = false;}
+        }else p1.arma.b[colpi1+1].live = false;
+
+
+        if( p1.arma.b[colpi1+2].live == true && !check_collision(obstacles, player, colpi1+2, colpi2)){
+
+          al_draw_filled_circle(p1.arma.b[colpi1+2].cx+64, p1.arma.b[colpi1+2].cy, p1.arma.b[colpi1+2].radius, al_map_rgb(142,44,2));
+          p1.arma.b[colpi1+2].cy -= p1.arma.b[colpi1+2].velocity;
+          if(p1.arma.b[colpi1+2].cy <= 0){ p1.arma.b[colpi1+2].live = false;  }
+        }else p1.arma.b[colpi1+2].live = false;
+
+        if(p1.arma.b[colpi1].live==false && p1.arma.b[colpi1+1].live==false && p1.arma.b[colpi1+2].live==false) {counter = 0; sparo = false;} //se tutti e tre i colpi sono despawnati
+
+
+      }
+
+
+      if(dir == 1){ //LEFT
+
+        if(p1.arma.b[colpi1].live == true && !check_collision(obstacles, player, colpi1, colpi2)){
+
+          al_draw_filled_circle(p1.arma.b[colpi1].cx, p1.arma.b[colpi1].cy, p1.arma.b[colpi1].radius, al_map_rgb(142,44,2));
+          p1.arma.b[colpi1].cx -= p1.arma.b[colpi1].velocity;
+          if(p1.arma.b[colpi1].cx <= 0){ p1.arma.b[colpi1].live = false;}
+        }else  p1.arma.b[colpi1].live = false;
+
+        if( p1.arma.b[colpi1+1].live == true && !check_collision(obstacles, player, colpi1+1, colpi2)){
+          al_draw_filled_circle(p1.arma.b[colpi1+1].cx, p1.arma.b[colpi1+1].cy+32, p1.arma.b[colpi1+1].radius, al_map_rgb(142,44,2));
+          p1.arma.b[colpi1+1].cx -= p1.arma.b[colpi1+1].velocity;
+          if(p1.arma.b[colpi1+1].cx <= 0){ p1.arma.b[colpi1+1].live = false;}
+        }else p1.arma.b[colpi1+1].live = false;
+
+
+        if( p1.arma.b[colpi1+2].live == true && !check_collision(obstacles, player, colpi1+2, colpi2)){
+
+          al_draw_filled_circle(p1.arma.b[colpi1+2].cx, p1.arma.b[colpi1+2].cy+64, p1.arma.b[colpi1+2].radius, al_map_rgb(142,44,2));
+          p1.arma.b[colpi1+2].cx -= p1.arma.b[colpi1+2].velocity;
+          if(p1.arma.b[colpi1+2].cx <= 0){ p1.arma.b[colpi1+2].live = false; }
+        }else p1.arma.b[colpi1+2].live = false;
+
+        if(p1.arma.b[colpi1].live==false && p1.arma.b[colpi1+1].live==false && p1.arma.b[colpi1+2].live==false){ counter = 0;sparo = false;} //se tutti e tre i colpi sono despawnati
+
+      }
+
+
+
+      if(dir == 2){ //DOWN
+        if(p1.arma.b[colpi1].live == true && !check_collision(obstacles, player, colpi1, colpi2)){
+
+          al_draw_filled_circle(p1.arma.b[colpi1].cx, p1.arma.b[colpi1].cy+64, p1.arma.b[colpi1].radius, al_map_rgb(142,44,2));
+          p1.arma.b[colpi1].cy += p1.arma.b[colpi1].velocity;
+          if(p1.arma.b[colpi1].cy >= Sheight){ p1.arma.b[colpi1].live = false;}
+        }else p1.arma.b[colpi1].live = false;
+
+        if( p1.arma.b[colpi1+1].live == true && !check_collision(obstacles, player, colpi1+1, colpi2)){
+          al_draw_filled_circle(p1.arma.b[colpi1+1].cx+32, p1.arma.b[colpi1+1].cy+64, p1.arma.b[colpi1+1].radius, al_map_rgb(142,44,2));
+          p1.arma.b[colpi1+1].cy += p1.arma.b[colpi1+1].velocity;
+          if(p1.arma.b[colpi1+1].cy >= Sheight){ p1.arma.b[colpi1+1].live = false;}
+
+
+        }else p1.arma.b[colpi1+1].live = false;
+        if( p1.arma.b[colpi1+2].live == true && !check_collision(obstacles, player, colpi1+2, colpi2)){
+          al_draw_filled_circle(p1.arma.b[colpi1+2].cx+64, p1.arma.b[colpi1+2].cy+64, p1.arma.b[colpi1+2].radius, al_map_rgb(142,44,2));
+          p1.arma.b[colpi1+2].cy += p1.arma.b[colpi1+2].velocity;
+          if(p1.arma.b[colpi1+2].cy >= Sheight){ p1.arma.b[colpi1+2].live = false;}
+
+
+        }else p1.arma.b[colpi1+2].live = false;
+
+        if(p1.arma.b[colpi1].live==false && p1.arma.b[colpi1+1].live==false && p1.arma.b[colpi1+2].live==false) {counter = 0;sparo = false;} //se tutti e tre i colpi sono despawnati
+
+
+      }
+
+
+      if(dir == 3){ //RIGHT
+
+        if(p1.arma.b[colpi1].live == true && !check_collision(obstacles, player, colpi1, colpi2)){
+
+          al_draw_filled_circle(p1.arma.b[colpi1].cx+32, p1.arma.b[colpi1].cy, p1.arma.b[colpi1].radius, al_map_rgb(142,44,2));
+          p1.arma.b[colpi1].cx += p1.arma.b[colpi1].velocity;
+          if(p1.arma.b[colpi1].cx >= Swidth){ p1.arma.b[colpi1].live = false;}
+        }else p1.arma.b[colpi1].live = false;
+
+        if( p1.arma.b[colpi1+1].live == true && !check_collision(obstacles, player, colpi1+1, colpi2)){
+          al_draw_filled_circle(p1.arma.b[colpi1+1].cx+32, p1.arma.b[colpi1+1].cy+32, p1.arma.b[colpi1+1].radius, al_map_rgb(142,44,2));
+          p1.arma.b[colpi1+1].cx += p1.arma.b[colpi1+1].velocity;
+          if(p1.arma.b[colpi1+1].cx >= Swidth){ p1.arma.b[colpi1+1].live = false;}
+
+
+        }else p1.arma.b[colpi1+1].live = false;
+        if( p1.arma.b[colpi1+2].live == true && !check_collision(obstacles, player, colpi1+2, colpi2)){
+          al_draw_filled_circle(p1.arma.b[colpi1+2].cx+32, p1.arma.b[colpi1+2].cy+64, p1.arma.b[colpi1+2].radius, al_map_rgb(142,44,2));
+          p1.arma.b[colpi1+2].cx += p1.arma.b[colpi1+2].velocity;
+          if(p1.arma.b[colpi1+2].cx >= Swidth){ p1.arma.b[colpi1+2].live = false; }
+
+
+        }else p1.arma.b[colpi1+2].live = false;
+
+        if(p1.arma.b[colpi1].live==false && p1.arma.b[colpi1+1].live==false && p1.arma.b[colpi1+2].live==false) {counter = 0;sparo = false;} //se tutti e tre i colpi sono despawnati
+
+      }
+
+
+
+    }
+
+    if (player == 2){
+
+      if(dir == 0){ //UP
+
+        if(p2.arma.b[colpi2].live == true && !check_collision(obstacles, player, colpi1, colpi2)){
+            al_draw_filled_circle(p2.arma.b[colpi2].cx, p2.arma.b[colpi2].cy, p2.arma.b[colpi2].radius, al_map_rgb(142,44,2));
+            p2.arma.b[colpi2].cy -= p2.arma.b[colpi2].velocity;
+            if(p2.arma.b[colpi2].cy <= 0){ p2.arma.b[colpi2].live = false; }
+          }else p2.arma.b[colpi2].live = false;
+        if( p2.arma.b[colpi2+1].live == true && !check_collision(obstacles, player, colpi1, colpi2+1)){
+
+          al_draw_filled_circle(p2.arma.b[colpi2+1].cx+32, p2.arma.b[colpi2+1].cy, p2.arma.b[colpi2+1].radius, al_map_rgb(142,44,2));
+          p2.arma.b[colpi2+1].cy -= p2.arma.b[colpi2+1].velocity;
+          if(p2.arma.b[colpi2+1].cy <= 0){ p2.arma.b[colpi2+1].live = false;}
+        }else p2.arma.b[colpi2+1].live = false;
+
+
+        if( p2.arma.b[colpi2+2].live == true && !check_collision(obstacles, player, colpi1, colpi2+2)){
+
+          al_draw_filled_circle(p2.arma.b[colpi2+2].cx+64, p2.arma.b[colpi2+2].cy, p2.arma.b[colpi2+2].radius, al_map_rgb(142,44,2));
+          p2.arma.b[colpi2+2].cy -= p2.arma.b[colpi2+2].velocity;
+          if(p2.arma.b[colpi2+2].cy <= 0){ p2.arma.b[colpi2+2].live = false;  }
+        }else p2.arma.b[colpi2+2].live = false;
+
+        if(p2.arma.b[colpi2].live==false && p2.arma.b[colpi2+1].live==false && p2.arma.b[colpi2+2].live==false) {counter2 = 0; sparo = false;} //se tutti e tre i colpi sono despawnati
+
+
+      }
+
+
+      if(dir == 1){ //LEFT
+
+        if(p2.arma.b[colpi2].live == true && !check_collision(obstacles, player, colpi1, colpi2)){
+
+          al_draw_filled_circle(p2.arma.b[colpi2].cx, p2.arma.b[colpi2].cy, p2.arma.b[colpi2].radius, al_map_rgb(142,44,2));
+          p2.arma.b[colpi2].cx -= p2.arma.b[colpi2].velocity;
+          if(p2.arma.b[colpi2].cx <= 0){ p2.arma.b[colpi2].live = false;}
+        }else  p2.arma.b[colpi2].live = false;
+
+        if( p2.arma.b[colpi2+1].live == true && !check_collision(obstacles, player, colpi1, colpi2+1)){
+          al_draw_filled_circle(p2.arma.b[colpi2+1].cx, p2.arma.b[colpi2+1].cy+32, p2.arma.b[colpi2+1].radius, al_map_rgb(142,44,2));
+          p2.arma.b[colpi2+1].cx -= p2.arma.b[colpi2+1].velocity;
+          if(p2.arma.b[colpi2+1].cx <= 0){ p2.arma.b[colpi2+1].live = false;}
+        }else p2.arma.b[colpi2+1].live = false;
+
+
+        if( p2.arma.b[colpi2+2].live == true && !check_collision(obstacles, player, colpi1, colpi2+2)){
+
+          al_draw_filled_circle(p2.arma.b[colpi2+2].cx, p2.arma.b[colpi2+2].cy+64, p2.arma.b[colpi2+2].radius, al_map_rgb(142,44,2));
+          p2.arma.b[colpi2+2].cx -= p2.arma.b[colpi2+2].velocity;
+          if(p2.arma.b[colpi2+2].cx <= 0){ p2.arma.b[colpi2+2].live = false; }
+        }else p2.arma.b[colpi2+2].live = false;
+
+        if(p2.arma.b[colpi2].live==false && p2.arma.b[colpi2+1].live==false && p2.arma.b[colpi2+2].live==false){ counter2 = 0;sparo = false;} //se tutti e tre i colpi sono despawnati
+
+      }
+
+
+
+      if(dir == 2){ //DOWN
+        if(p2.arma.b[colpi2].live == true && !check_collision(obstacles, player, colpi1, colpi2)){
+
+          al_draw_filled_circle(p2.arma.b[colpi2].cx, p2.arma.b[colpi2].cy+64, p2.arma.b[colpi2].radius, al_map_rgb(142,44,2));
+          p2.arma.b[colpi2].cy += p2.arma.b[colpi2].velocity;
+          if(p2.arma.b[colpi2].cy >= Sheight){ p2.arma.b[colpi2].live = false;}
+        }else p2.arma.b[colpi2].live = false;
+
+        if( p2.arma.b[colpi2+1].live == true && !check_collision(obstacles, player, colpi1, colpi2+1)){
+          al_draw_filled_circle(p2.arma.b[colpi2+1].cx+32, p2.arma.b[colpi2+1].cy+64, p2.arma.b[colpi2+1].radius, al_map_rgb(142,44,2));
+          p2.arma.b[colpi2+1].cy += p2.arma.b[colpi2+1].velocity;
+          if(p2.arma.b[colpi2+1].cy >= Sheight){ p2.arma.b[colpi2+1].live = false;}
+
+
+        }else p2.arma.b[colpi2+1].live = false;
+        if( p2.arma.b[colpi2+2].live == true && !check_collision(obstacles, player, colpi1, colpi2+2)){
+          al_draw_filled_circle(p2.arma.b[colpi2+2].cx+64, p2.arma.b[colpi2+2].cy+64, p2.arma.b[colpi2+2].radius, al_map_rgb(142,44,2));
+          p2.arma.b[colpi2+2].cy += p2.arma.b[colpi2+2].velocity;
+          if(p2.arma.b[colpi2+2].cy >= Sheight){ p2.arma.b[colpi2+2].live = false;}
+
+
+        }else p2.arma.b[colpi2+2].live = false;
+
+        if(p2.arma.b[colpi2].live==false && p2.arma.b[colpi2+1].live==false && p2.arma.b[colpi2+2].live==false) {counter2 = 0;sparo = false;} //se tutti e tre i colpi sono despawnati
+
+
+      }
+
+
+      if(dir == 3){ //RIGHT
+
+        if(p2.arma.b[colpi2].live == true && !check_collision(obstacles, player, colpi1, colpi2)){
+
+          al_draw_filled_circle(p2.arma.b[colpi2].cx+32, p2.arma.b[colpi2].cy, p2.arma.b[colpi2].radius, al_map_rgb(142,44,2));
+          p2.arma.b[colpi2].cx += p2.arma.b[colpi2].velocity;
+          if(p2.arma.b[colpi2].cx >= Swidth){ p2.arma.b[colpi2].live = false;}
+        }else p2.arma.b[colpi2].live = false;
+
+        if( p2.arma.b[colpi2+1].live == true && !check_collision(obstacles, player, colpi1, colpi2+1)){
+          al_draw_filled_circle(p2.arma.b[colpi2+1].cx+32, p2.arma.b[colpi2+1].cy+32, p2.arma.b[colpi2+1].radius, al_map_rgb(142,44,2));
+          p2.arma.b[colpi2+1].cx += p2.arma.b[colpi2+1].velocity;
+          if(p2.arma.b[colpi2+1].cx >= Swidth){ p2.arma.b[colpi2+1].live = false;}
+
+
+        }else p2.arma.b[colpi2+1].live = false;
+        if( p2.arma.b[colpi2+2].live == true && !check_collision(obstacles, player, colpi1, colpi2+2)){
+          al_draw_filled_circle(p2.arma.b[colpi2+2].cx+32, p2.arma.b[colpi2+2].cy+64, p2.arma.b[colpi2+2].radius, al_map_rgb(142,44,2));
+          p2.arma.b[colpi2+2].cx += p2.arma.b[colpi2+2].velocity;
+          if(p2.arma.b[colpi2+2].cx >= Swidth){ p2.arma.b[colpi2+2].live = false; }
+
+
+        }else p2.arma.b[colpi2+2].live = false;
+
+        if(p2.arma.b[colpi2].live==false && p2.arma.b[colpi2+1].live==false && p2.arma.b[colpi2+2].live==false) {counter2 = 0;sparo = false;} //se tutti e tre i colpi sono despawnati
+
+      }
+
+     }
+   }
+
+}
 
 
 

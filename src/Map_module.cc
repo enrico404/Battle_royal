@@ -29,7 +29,7 @@ using namespace std;
 #include "define.h"
 #include "data_structure.h"
 #include "init_object.h"
-#include "Map_module.h"
+
 
 
 bool getMap(ifstream &f1, int map[][COL]){

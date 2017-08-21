@@ -5,9 +5,9 @@
 
 /** vita dei player */
 #define LIFE 100
-/** velocità di movimento dei player */
+/** velocità di movimento dei player. 2.5 default */
 #define MOVESPEED 2.5
-/** 2.5 */
+
 /** Numero items da generare */
 #define NUM_ITEMS 6
 
@@ -19,36 +19,10 @@
 #define BlockSize 120
 
 
-/** row e columns della matrice del file mappa */
+/** row della matrice del file mappa */
 #define ROW 10
+/** columns della matrice del file mappa */
 #define COL 6
 
 /** costante numero ostacoli nella mappa */
 #define NUM_OBSTACLES 40
-
-/** numero colpi bazooka */
-#define NbulletBazooka 10
-/** raggio colpo bazooka */
-#define radiusBazooka 15;
-/**velocità colpo bazooka */
-#define vel_bazooka 13;
-/** danno colpo del bazooka */
-#define damageBazooka 30;
-
-
-
-/** radius del proiettile della pistola */
-#define radiusB 5
-/** numero colpi pistola */
-#define NbulletPistol 25
-/** danno della pistola */
-#define damagePistol 5;
-/** velocità colpo pistola */
-#define vel_pistol 18;
-
-/**velocità colpo rifle. */
-#define vel_Rifle 18;
-/** danno colpo del rifle */
-#define damagerifle 10;
-/** numero colpi rifle */
-#define NbulletRifle 40

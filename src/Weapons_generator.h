@@ -10,7 +10,7 @@
 
 /** Funzione per creare l'array di armi inizializzato casualmente */
 
-void genWeaponsArray(weapon WArray[], weapon bazooka, weapon rifle, weapon heart, weapon pistol);
+void genWeaponsArray(weapon WArray[], weapon bazooka, weapon rifle, weapon heart, weapon pistol, weapon shotgun);
 
 /** funzione per settare le coordinate delle armi sulla mappa  */
 void set_position_on_map(weapon WArray[], int mappa);

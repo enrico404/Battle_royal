@@ -70,7 +70,7 @@ bool check_collision_player(Barrier obstacles[], int player){
     }
 
   }
-
+  return false;
 }
 
 
@@ -110,7 +110,7 @@ int check_collision_weapon(weapon WArray[], int player){
   if(player == 1){
 
     for(int i=0; i<NUM_ITEMS; i++){
-      if(collision(p1.x,p1.y,WArray[i].x, WArray[i].y, 64,64, 50, 26) && WArray[i].id !=0){
+      if(collision(p1.x,p1.y,WArray[i].x, WArray[i].y, 64,64, 40, 26) && WArray[i].id !=0){
         int id;
         id = WArray[i].id;
         WArray[i].id = 0;
@@ -121,7 +121,7 @@ int check_collision_weapon(weapon WArray[], int player){
 
   }else if(player == 2){
     for(int i=0; i<NUM_ITEMS; i++){
-      if(collision(p2.x,p2.y,WArray[i].x, WArray[i].y, 64,64, 50, 26) && WArray[i].id !=0){
+      if(collision(p2.x,p2.y,WArray[i].x, WArray[i].y, 64,64, 40, 26) && WArray[i].id !=0){
         int id;
         id = WArray[i].id;
         WArray[i].id = 0;

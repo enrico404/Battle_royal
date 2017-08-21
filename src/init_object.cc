@@ -37,6 +37,38 @@ extern player p2;
 ALLEGRO_SAMPLE *damageL;
 ALLEGRO_SAMPLE *damageR;
 
+
+/** numero colpi bazooka */
+extern int NbulletBazooka;
+/** raggio colpo bazooka */
+extern int radiusBazooka;
+/** velocità colpo bazooka */
+extern int vel_bazooka;
+/** danno colpo del bazooka */
+extern int damageBazooka;
+/** numero colpi shotgun */
+extern int NbulletShotgun;
+/** raggio colpo shotgun */
+extern int radiusShotgun;
+/**velocità colpo shotgun */
+extern int vel_shotgun;
+/** danno colpo del shotgun */
+extern int damageShotgun;
+/** radius del proiettile della pistola */
+extern int radiusB;
+/** numero colpi pistola */
+extern int NbulletPistol;
+/** danno della pistola */
+extern int damagePistol;
+/** velocità colpo pistola */
+extern int vel_pistol;
+/** velocità colpo rifle. */
+extern int vel_Rifle;
+/** danno colpo del rifle */
+extern int damagerifle;
+/** numero colpi rifle */
+extern int NbulletRifle;
+
 void init_player(player &p, float x, float y, int life, float movespeed, int sx, int sy, weapon pistol){
   p.x  = x;
   p.y = y;
@@ -325,37 +357,49 @@ void init_mappa3(Barrier obstacles[]){
 }
 
 
-void init_bullets(Bullet b[], int damage, int vel){
-  for(int i=0; i<NbulletPistol; i++){
-    b[i].live = false;
-    b[i].cx = p2.x;
-    b[i].cy =p2.y;
-    b[i].velocity = vel;
-    b[i].radius = radiusB;
-    b[i].Damage = damage;
-  }
-}
-
-void init_bazooka(weapon &bazooka){
-  bazooka.id = 1;
-  strcpy(bazooka.nome, "bazooka");
-  bazooka.numBullets = NbulletBazooka;
+void init_bazooka(weapon &Bazooka){
+  Bazooka.id = 1;
+  strcpy(Bazooka.nome, "Bazooka");
+  Bazooka.numBullets = NbulletBazooka;
 
   //inizializzo i proiettili
-  bazooka.b = new Bullet[bazooka.numBullets];
-  for(int i=0; i<bazooka.numBullets; i++){
-    bazooka.b[i].live = false;
-    bazooka.b[i].cx = 0;
-    bazooka.b[i].cy = 0;
-    bazooka.b[i].velocity = vel_bazooka;
-    bazooka.b[i].radius = radiusBazooka;
-    bazooka.b[i].Damage = damageBazooka;
+  Bazooka.b = new Bullet[Bazooka.numBullets];
+  for(int i=0; i<Bazooka.numBullets; i++){
+    Bazooka.b[i].live = false;
+    Bazooka.b[i].cx = 0;
+    Bazooka.b[i].cy = 0;
+    Bazooka.b[i].velocity = vel_bazooka;
+    Bazooka.b[i].radius = radiusBazooka;
+    Bazooka.b[i].Damage = damageBazooka;
 
 
   }
-  bazooka.x = 9999;
-  bazooka.y = 9999;
+  Bazooka.x = 9999;
+  Bazooka.y = 9999;
 }
+
+
+void init_shotgun(weapon &shotgun){
+  shotgun.id = 5;
+  strcpy(shotgun.nome, "shotgun");
+  shotgun.numBullets = NbulletShotgun;
+
+  //inizializzo i proiettili
+  shotgun.b = new Bullet[shotgun.numBullets];
+  for(int i=0; i<shotgun.numBullets; i++){
+    shotgun.b[i].live = false;
+    shotgun.b[i].cx = 0;
+    shotgun.b[i].cy = 0;
+    shotgun.b[i].velocity = vel_shotgun;
+    shotgun.b[i].radius = radiusShotgun;
+    shotgun.b[i].Damage = damageShotgun;
+
+
+  }
+  shotgun.x = 9999;
+  shotgun.y = 9999;
+}
+
 
 
 void init_pistol(weapon &pistol){
