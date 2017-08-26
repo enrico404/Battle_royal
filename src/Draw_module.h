@@ -18,7 +18,7 @@ void drawBullet_rifle(Barrier obstacles[], int dir, bool &sparo, int player, int
 /** funzione che disegna i proiettili ad ogni frame. Utilizzata per le armi: shotgun */
 void drawBullet_shotgun(Barrier obstacles[], int dir, bool &sparo, int player, int colpi1, int colpi2);
 
-/** visualizzazione della mappa (viene visualizzata ad assi invertiti rispetto al file txt) */
+/** funzione per la visualizzazione del terreno di gioco (senza ostacoli). Viene visualizzata ad assi invertiti rispetto al file txt */
 void drawMap(int map[][COL], ALLEGRO_BITMAP *ground,ALLEGRO_BITMAP *ground2);
 
 /** funzione che data come parametro la vita del player come stringa la disegna

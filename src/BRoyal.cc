@@ -194,8 +194,8 @@ int main(int argc, char **argv)
   init_player(p2, 1000, 620, LIFE, MOVESPEED, 64, 0, pistol);
 
   /** INV: il player 1 e il player 2 devono essere definti */
-  assert(p1.life);
-  assert(p2.life);
+  assert(p1.life == 100);
+  assert(p2.life == 100);
 
 
 

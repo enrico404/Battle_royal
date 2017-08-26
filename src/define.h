@@ -24,5 +24,5 @@
 /** columns della matrice del file mappa */
 #define COL 6
 
-/** costante numero ostacoli nella mappa */
+/** numero ostacoli nella mappa */
 #define NUM_OBSTACLES 40
