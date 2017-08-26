@@ -359,7 +359,7 @@ void init_mappa3(Barrier obstacles[]){
 
 void init_bazooka(weapon &Bazooka){
   Bazooka.id = 1;
-  strcpy(Bazooka.nome, "Bazooka");
+  strcpy(Bazooka.nome, "bazooka");
   Bazooka.numBullets = NbulletBazooka;
 
   //inizializzo i proiettili
@@ -376,6 +376,13 @@ void init_bazooka(weapon &Bazooka){
   }
   Bazooka.x = 9999;
   Bazooka.y = 9999;
+}
+
+void init_shoes(weapon &shoes){
+  shoes.id = 6;
+  strcpy(shoes.nome, "shoes");
+  shoes.numBullets = 0;
+
 }
 
 
@@ -445,5 +452,21 @@ void init_heart(weapon &heart){
   heart.id = 3;
   strcpy(heart.nome, "heart");
   heart.numBullets = 0;
+
+}
+
+
+void init_heartPlus(weapon &HeartPlus){
+  HeartPlus.id = 7;
+  strcpy(HeartPlus.nome, "HeartPlus");
+  HeartPlus.numBullets = 0;
+
+}
+
+
+void init_BulletPerf(weapon &BulletPerf){
+  BulletPerf.id = 8;
+  strcpy(BulletPerf.nome, "BulletPerf");
+  BulletPerf.numBullets = 0;
 
 }

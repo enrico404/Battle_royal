@@ -1,9 +1,9 @@
 /**
 * @mainpage Battle-Royal
 *
-* Gioco multiplayer battle arena creato con allegro 5
+* Gioco multiplayer battle arena creato con allegro5.
 *
-* Vedere la documentazione della funzione ::main per maggiori dettagli
+*  Vedere la documentazione della funzione ::main per maggiori dettagli
 * sulle funzionalità e sulla loro implementazione.
 *
 * @author Enrico Sedoni
@@ -44,14 +44,20 @@ using namespace std;
 #include "Weapons_generator.h"
 
 
-
-#ifdef DEBUG_MODE
-/** Definendo questa macro si disattivano le assert se la macro
-DEBUG_MODE non è definita */
-#define NDEBUG
-#endif
+//
+// #ifdef DEBUG_MODE
+// /** Definendo questa macro si disattivano le assert se la macro
+// DEBUG_MODE non è definita */
+// #define NDEBUG
+// #endif
 
 #include <assert.h>
+
+
+unsigned int MASK = 3; // livello di debug
+#define DBG(A, B) {if ((A) & MASK) {B; } }
+#define D1(a) DBG(1, a)
+#define D2(a) DBG(2, a)
 
 
 /** allocamento del player 1 all'interno del gioco */
@@ -76,7 +82,7 @@ int vel_bazooka = 13;
 int damageBazooka = 30;
 
 /** numero colpi shotgun */
-int NbulletShotgun = 54;
+int NbulletShotgun = 50;
 
 /** raggio colpo shotgun */
 int radiusShotgun = 5;
@@ -108,8 +114,10 @@ int damagerifle = 10;
 /** numero colpi rifle */
 int NbulletRifle = 40;
 
-
-
+/** danno da perforazione player 1 */
+int dmg1 = 0;
+/** danno da perforazione player 2 */
+int dmg2 = 0;
 
 
 
@@ -166,6 +174,9 @@ int main(int argc, char **argv)
   weapon heart;
   weapon pistol;
   weapon shotgun;
+  weapon shoes;
+  weapon HeartPlus;
+  weapon BulletPerf;
 
 
 
@@ -175,6 +186,9 @@ int main(int argc, char **argv)
   init_heart(heart);
   init_pistol(pistol);
   init_shotgun(shotgun);
+  init_shoes(shoes);
+  init_heartPlus(HeartPlus);
+  init_BulletPerf(BulletPerf);
 
   init_player(p1, 10, 50, LIFE, MOVESPEED, 64, 0, pistol);
   init_player(p2, 1000, 620, LIFE, MOVESPEED, 64, 0, pistol);
@@ -286,6 +300,10 @@ int main(int argc, char **argv)
   ALLEGRO_BITMAP *HeartTexture = al_load_bitmap("../media/HeartTexture.png");
   ALLEGRO_BITMAP *pistolTexture = al_load_bitmap("../media/pistol.png");
   ALLEGRO_BITMAP *ShotgunTexture = al_load_bitmap("../media/shotgun.png");
+  ALLEGRO_BITMAP *shoesTexture = al_load_bitmap("../media/shoes.png");
+  ALLEGRO_BITMAP *HeartPlusTexture = al_load_bitmap("../media/HeartPlus.png");
+  ALLEGRO_BITMAP *BulletPerfTexture = al_load_bitmap("../media/BulletPerf.png");
+  ALLEGRO_BITMAP *IconBullet = al_load_bitmap("../media/IconBullet.png");
 
   /** Carico texture menu */
   ALLEGRO_BITMAP *menu1 = al_load_bitmap("../media/BRmenu.png");
@@ -368,11 +386,12 @@ int main(int argc, char **argv)
 
   }
 
-  genWeaponsArray(WArray, bazooka, rifle, heart, pistol, shotgun);
+  genWeaponsArray(WArray, bazooka, rifle, heart, pistol, shotgun, shoes, HeartPlus, BulletPerf);
 
   /** INV: il valore della mappa deve essere maggiore o uguale a 1 */
   assert(mappa);
 
+  D1(cout<<"valore mappa: "<<mappa<<endl);
   if(mappa == 1){
     init_mappa1(obstacles);
     set_position_on_map(WArray, mappa);}
@@ -398,6 +417,14 @@ int main(int argc, char **argv)
 
 
         if(!getMap(f1,map)){cerr << "errore nel caricamento della mappa" << '\n';}
+
+        if(MASK != 0)
+        for(int i=0; i<ROW; i++){
+          for(int j=0; j<COL; j++){
+            D2(cout<<map[i][j]);
+          }
+          D2(cout<<endl);
+        }
 
         // if(al_is_audio_installed()) std::cout << "audio installato" << '\n';
         al_show_native_message_box(display, "Istruzioni","Comandi: ", "Player 1: FRECCE DIREZIONALI e CTRL per sparare. \nPlayer 2: W,A,S,D e J per sparare. \nEsc per uscire.",  NULL, ALLEGRO_MESSAGEBOX_WARN);
@@ -433,12 +460,14 @@ int main(int argc, char **argv)
                     if(sparo==false)
                     al_play_sample(pistolShot, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
                     Shot(sparo, 1);
+                    D2(cout<<"sparo pistola p1"<<endl);
                   }
 
                   if(strcmp(p1.arma.nome, "bazooka") == 0){
                     if(sparo==false)
                     al_play_sample(BazookaShot, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
                     Shot(sparo, 1);
+                    D2(cout<<"sparo bazooka p1"<<endl);
 
                   }
 
@@ -446,11 +475,13 @@ int main(int argc, char **argv)
 
                     al_play_sample(RifleShot, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
                     ShotRifle(sparo, 1);
+                    D2(cout<<"sparo rifle p1"<<endl);
                   }
                   if(strcmp(p1.arma.nome, "shotgun") == 0){
                     if(sparo==false)
                     al_play_sample(shotgunShot, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
                     ShotShotgun(sparo, 1);
+                    D2(cout<<"sparo shotgun p1"<<endl);
                   }
 
 
@@ -462,6 +493,7 @@ int main(int argc, char **argv)
                     if(sparo2==false)
                     al_play_sample(pistolShot, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
                     Shot(sparo2, 2);
+                    D2(cout<<"sparo pistola p2"<<endl);
 
                   }
 
@@ -469,17 +501,20 @@ int main(int argc, char **argv)
                     if(sparo2==false)
                     al_play_sample(BazookaShot, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
                     Shot(sparo2, 2);
+                    D2(cout<<"sparo bazooka p2"<<endl);
 
                   }
 
                   if(strcmp(p2.arma.nome, "rifle") == 0){
                     al_play_sample(RifleShot, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
                     ShotRifle(sparo2, 2);
+                    D2(cout<<"sparo rifle p2"<<endl);
                   }
                   if(strcmp(p2.arma.nome, "shotgun") == 0){
                     if(sparo2==false)
                     al_play_sample(shotgunShot, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
                     ShotShotgun(sparo2, 2);
+                    D2(cout<<"sparo shotgun p2"<<endl);
                   }
 
 
@@ -550,15 +585,17 @@ int main(int argc, char **argv)
               }
               int oggetto;
               if((oggetto = check_collision_weapon(WArray, 1))){
-
+                D1(cout<<"id oggetto preso dal p1: "<<oggetto<<endl);
                 //equip oggetto
                 if(oggetto == 1){
                   al_play_sample(equipWeapon, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+                  dmg1 = 0;
                   p1.arma = bazooka;
 
                 }
                 if(oggetto == 2){
                   al_play_sample(equipWeapon, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+                  dmg1 = 0;
                   p1.arma = rifle;
                 }
                 if(oggetto == 3){
@@ -568,20 +605,40 @@ int main(int argc, char **argv)
                   else{
                     int diff;
                     diff = 100 - p1.life; // trovo quanto manca per arrivare a 100pt vita
+                    if(p1.life < 100)
                     p1.life += diff;
                   }
                 }
                 if(oggetto == 4){
                   al_play_sample(equipWeapon, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+                  dmg1 = 0;
                   p1.arma = pistol;
 
 
                 }
                 if(oggetto == 5){
                   al_play_sample(equipWeapon, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+                  dmg1 = 0;
                   p1.arma = shotgun;
 
 
+                }
+                if(oggetto == 6){
+                  al_play_sample(lifeUp, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+                  if(p1.movespeed < 5.5)
+                  p1.movespeed += 3;
+
+
+                }
+                if(oggetto == 7){
+                  al_play_sample(lifeUp, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+                  p1.life += 50;
+
+
+                }
+                if(oggetto == 8){
+                  al_play_sample(equipWeapon, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+                  dmg1 = 5;
                 }
               }
 
@@ -640,15 +697,18 @@ int main(int argc, char **argv)
 
               int oggetto2;
               if((oggetto2 = check_collision_weapon(WArray, 2))){
+                D1(cout<<"id oggetto preso dal p2: "<<oggetto2<<endl);
 
                 //equip oggetto2
                 if(oggetto2 == 1){
                   al_play_sample(equipWeapon, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+                  dmg2 = 0;
                   p2.arma = bazooka;
 
                 }
                 if(oggetto2 == 2){
                   al_play_sample(equipWeapon, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+                  dmg2 = 0;
                   p2.arma = rifle;
                 }
                 if(oggetto2 == 3){
@@ -658,20 +718,39 @@ int main(int argc, char **argv)
                   else{
                     int diff;
                     diff = 100 - p2.life; // trovo quanto manca per arrivare a 100pt vita
+                    if(p2.life < 100)
                     p2.life += diff;
                   }
                 }
                 if(oggetto2 == 4){
                   al_play_sample(equipWeapon, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+                  dmg2 = 0;
                   p2.arma = pistol;
 
 
                 }
                 if(oggetto2 == 5){
                   al_play_sample(equipWeapon, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+                  dmg2 = 0;
                   p2.arma = shotgun;
 
+                }
+                if(oggetto2 == 6){
+                  al_play_sample(lifeUp, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+                  if(p2.movespeed < 5.5)
+                  p2.movespeed += 3;
 
+
+                }
+                if(oggetto2 == 7){
+                  al_play_sample(lifeUp, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+                  p2.life += 50;
+
+
+                }
+                if(oggetto2 == 8){
+                  al_play_sample(equipWeapon, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+                  dmg2 = 5;
                 }
               }
 
@@ -692,7 +771,8 @@ int main(int argc, char **argv)
           }
           //se non ci sono più armi sul terreno di gioco, le rigenero
           if(is_emptyA(WArray)){
-            genWeaponsArray(WArray, bazooka, rifle, heart, pistol, shotgun);
+            D2(cout<<"Array armi vuoto. Riempio"<<endl);
+            genWeaponsArray(WArray, bazooka, rifle, heart, pistol, shotgun, shoes, HeartPlus, BulletPerf);
             if(mappa == 1)
             set_position_on_map(WArray, mappa);
             if(mappa == 2)
@@ -748,7 +828,7 @@ int main(int argc, char **argv)
             drawBullet(obstacles, dir2,sparo2,2, p1.arma.numBullets,p2.arma.numBullets);
 
 
-            draw_items(WArray, bazookaTexture, rifleTexture, HeartTexture, pistolTexture, ShotgunTexture);
+            draw_items(WArray, bazookaTexture, rifleTexture, HeartTexture, pistolTexture, ShotgunTexture, shoesTexture, HeartPlusTexture, BulletPerfTexture);
 
             if(p1.arma.id == 1)
             al_draw_bitmap_region(playerBazooka, p1.sourceX, p1.sourceY * al_get_bitmap_height(player) / 4, 64, 64, p1.x, p1.y,0);
@@ -773,6 +853,9 @@ int main(int argc, char **argv)
             drawLife(font, 75, 10, vita, p1.life);
             al_draw_text(font2, al_map_rgb(255,255,255), 20, 45, 0, "Colpi: ");
             al_draw_text(font2, al_map_rgb(255,255,255), 75, 45, 0, colpiP1);
+            if(dmg1 != 0){
+              al_draw_bitmap(IconBullet, 105, 55, 0);
+            }
 
 
 
@@ -782,6 +865,9 @@ int main(int argc, char **argv)
             drawLife(font, Swidth-85, 10, vita, p2.life);
             al_draw_text(font2, al_map_rgb(255,255,255), Swidth-140, 45, 0, "Colpi: ");
             al_draw_text(font2, al_map_rgb(255,255,255), Swidth-85, 45, 0, colpiP2);
+            if(dmg2 != 0){
+              al_draw_bitmap(IconBullet, Swidth-55, 55, 0);
+            }
 
 
 
@@ -820,6 +906,10 @@ int main(int argc, char **argv)
         al_destroy_bitmap(bazookaTexture);
         al_destroy_bitmap(pistolTexture);
         al_destroy_bitmap(ShotgunTexture);
+        al_destroy_bitmap(shoesTexture);
+        al_destroy_bitmap(HeartPlusTexture);
+        al_destroy_bitmap(BulletPerfTexture);
+        al_destroy_bitmap(IconBullet);
 
         al_destroy_bitmap(menu1);
         al_destroy_bitmap(menu2);

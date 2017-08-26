@@ -1,5 +1,5 @@
 /**
-* Inizio header del modulo che si occupa della gestione dei vari tipi di spari
+* Header del modulo Shots_manager.cc che si occupa della gestione dei vari tipi di spari
 */
 /**
 * @file

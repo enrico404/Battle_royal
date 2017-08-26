@@ -69,21 +69,6 @@ void Shot(bool &sparo, int player){
 
 void ShotRifle(bool &sparo, int player){
 
-
-    // if(counter == 3) {
-    //   if(sparo == false){
-    //     if(player == 1 && p1.arma.numBullets > 0){
-    //         p1.arma.b[p1.arma.numBullets-1].live = true;
-    //         p1.arma.b[p1.arma.numBullets-1].cx = p1.x;
-    //         p1.arma.b[p1.arma.numBullets-1].cy = p1.y;
-    //         p1.arma.numBullets--;
-    //         sparo = true;
-    //     }
-    //     counter = 1;
-    //
-    //   }
-    // }
-    //else
     if(counter < 3)
      if(player == 1 && p1.arma.numBullets > 0){
       p1.arma.b[p1.arma.numBullets-1].live = true;
@@ -112,20 +97,21 @@ void ShotShotgun(bool &sparo, int player){
   if(sparo == false ){
 
     if(player == 1 && p1.arma.numBullets > 0){
+
       p1.arma.b[p1.arma.numBullets-1].live = true;
       p1.arma.b[p1.arma.numBullets-1].cx = p1.x;
       p1.arma.b[p1.arma.numBullets-1].cy = p1.y;
-      p1.arma.numBullets--;
+
 
       p1.arma.b[p1.arma.numBullets-2].live = true;
       p1.arma.b[p1.arma.numBullets-2].cx = p1.x;
       p1.arma.b[p1.arma.numBullets-2].cy = p1.y;
-      p1.arma.numBullets--;
 
-      p1.arma.b[p1.arma.numBullets-3].live = true;
-      p1.arma.b[p1.arma.numBullets-3].cx = p1.x;
-      p1.arma.b[p1.arma.numBullets-3].cy = p1.y;
-      p1.arma.numBullets--;
+      //
+      // p1.arma.b[p1.arma.numBullets-3].live = true;
+      // p1.arma.b[p1.arma.numBullets-3].cx = tmpX;
+      // p1.arma.b[p1.arma.numBullets-3].cy = tmpY;
+      p1.arma.numBullets-= 2;
       sparo = true;
       //  stampaB(b);
 
@@ -135,17 +121,17 @@ void ShotShotgun(bool &sparo, int player){
       p2.arma.b[p2.arma.numBullets-1].live = true;
       p2.arma.b[p2.arma.numBullets-1].cx = p2.x;
       p2.arma.b[p2.arma.numBullets-1].cy = p2.y;
-      p2.arma.numBullets--;
+
 
       p2.arma.b[p2.arma.numBullets-2].live = true;
       p2.arma.b[p2.arma.numBullets-2].cx = p2.x;
       p2.arma.b[p2.arma.numBullets-2].cy = p2.y;
-      p2.arma.numBullets--;
+      p2.arma.numBullets-= 2;
 
-      p2.arma.b[p2.arma.numBullets-3].live = true;
-      p2.arma.b[p2.arma.numBullets-3].cx = p2.x;
-      p2.arma.b[p2.arma.numBullets-3].cy = p2.y;
-      p2.arma.numBullets--;
+      // p2.arma.b[p2.arma.numBullets-3].live = true;
+      // p2.arma.b[p2.arma.numBullets-3].cx = p2.x;
+      // p2.arma.b[p2.arma.numBullets-3].cy = p2.y;
+      // p2.arma.numBullets--;
       sparo = true;
       //  stampaB(b);
 

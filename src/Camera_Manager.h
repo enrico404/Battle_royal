@@ -1,7 +1,7 @@
-/* Header modulo per la gestione della camera */
+/* Header del modulo Camera_Manager.cc per la gestione della camera */
 /**
 * @file
-* Header modulo per la gestione della camera
+* Header Camera_Manager.cc modulo per la gestione della camera (Non utilizzato)
 */
 
 

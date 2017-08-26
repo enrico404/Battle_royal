@@ -4,7 +4,7 @@
 */
 /**
 * @file
-* Header del modulo di inizializzazione di tutti gli oggetti del gioco
+* Header del modulo init_object.cc di inizializzazione di tutti gli oggetti del gioco
 */
 
 
@@ -28,5 +28,11 @@ void init_heart(weapon &heart);
 void init_pistol(weapon &pistol);
 /** funzione per la definizione dell'arma "shotgun" */
 void init_shotgun(weapon &shotgun);
+/** funzione per la definizione dell'oggetto "shoes" */
+void init_shoes(weapon &shoes);
+/** funzione per la definizione dell'oggetto "HeartPlus" */
+void init_heartPlus(weapon &HeartPlus);
+/** funzione per la definizione dell'oggetto "BulletPerf" */
+void init_BulletPerf(weapon &BulletPerf);
 
 /* fine header modulo init_object */

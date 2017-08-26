@@ -34,7 +34,14 @@ using namespace std;
 #include "Draw_module.h"
 #include "Collision_manager.h"
 
+
+extern int MASK; // livello di debug
+#define DBG(A, B) {if ((A) & MASK) {B; } }
+#define D1(a) DBG(1, a)
+#define D2(a) DBG(2, a)
+
 extern player p1,p2;
+extern int dmg1, dmg2;
 
 extern ALLEGRO_SAMPLE *damageR;
 extern ALLEGRO_SAMPLE *damageL;
@@ -79,8 +86,8 @@ bool check_collision(Barrier obstacles[], int player, int colpi1, int colpi2){
   if(player == 1 && p1.arma.b[colpi1].live == true){
     if(collision(p1.arma.b[colpi1].cx, p1.arma.b[colpi1].cy, p2.x, p2.y, p1.arma.b[colpi1].radius+5, p1.arma.b[colpi1].radius+5, 64,64)){
       if(!al_play_sample(damageR, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL)) std::cout << "errore" << '\n';
-      p2.life -= p1.arma.b[colpi1].Damage;
-      cout<<"damage"<<endl;
+      p2.life -= p1.arma.b[colpi1].Damage + dmg1;
+      D1(cout<<"damage al player 1"<<endl);
       return true;
     }
     for(int i=0;i<NUM_OBSTACLES; i++){
@@ -93,8 +100,8 @@ bool check_collision(Barrier obstacles[], int player, int colpi1, int colpi2){
 
     if(collision(p2.arma.b[colpi2].cx, p2.arma.b[colpi2].cy, p1.x, p1.y, p2.arma.b[colpi2].radius+5, p2.arma.b[colpi2].radius+5, 64,64)){
       al_play_sample(damageL, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
-      p1.life -= p2.arma.b[colpi2].Damage;
-      cout<<"damage2"<<endl;
+      p1.life -= p2.arma.b[colpi2].Damage + dmg2;
+      D1(cout<<"damage al player 2"<<endl);
       return true;
     }
     for(int i=0;i<NUM_OBSTACLES; i++){

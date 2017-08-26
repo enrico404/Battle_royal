@@ -1,4 +1,7 @@
-/* Modulo per la gestione della camera */
+/* Modulo per la gestione della camera
+* Il modulo si occupa di gestire tutte le collisioni tra oggeti nella mappa e dei colpi.
+* Viene getita anche la collisione tra proiettile e player.
+*/
 /**
 * @file
 * Modulo per la gestione della camera

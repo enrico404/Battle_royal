@@ -39,12 +39,7 @@ bool getMap(ifstream &f1, int map[][COL]){
       f1>>map[i][j];
     }
   }
-  for(int i=0; i<ROW; i++){
-    for(int j=0; j<COL; j++){
-      cout<<map[i][j];
-    }
-    cout<<endl;
-  }
+  
   return true;
 
 }

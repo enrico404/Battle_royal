@@ -22,7 +22,7 @@ struct Bullet{
 };
 
 
-/** Struc Weapon, contiene gli attributi principali per gestire la singola arma */
+/** Struct Weapon, contiene gli attributi principali per gestire la singola arma */
 struct weapon{
   /** Nome dell'arma */
   char nome[30];
