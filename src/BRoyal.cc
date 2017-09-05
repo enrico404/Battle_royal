@@ -441,13 +441,13 @@ int main(int argc, char **argv)
           if(events.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {work = false;}
           else if(p1.life <= 0){
             //vittoria player 1
-            al_show_native_message_box(display, "Vittoria!","Il giocatore 2 vince! ", "Fai schifo player 1",  NULL, ALLEGRO_MESSAGEBOX_OK_CANCEL);
+            al_show_native_message_box(display, "Vittoria!","Il giocatore 2 vince! ", "",  NULL, ALLEGRO_MESSAGEBOX_OK_CANCEL);
             work = false;
 
           }
           else if(p2.life <=0){
             //vittoria player 2
-            al_show_native_message_box(display, "Vittoria!","Il giocatore 1 vince! ", "Fai schifo player 2",  NULL, ALLEGRO_MESSAGEBOX_OK_CANCEL);
+            al_show_native_message_box(display, "Vittoria!","Il giocatore 1 vince! ", "",  NULL, ALLEGRO_MESSAGEBOX_OK_CANCEL);
             work = false;
 
           }
